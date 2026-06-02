@@ -1,1 +1,683 @@
+<!-- support.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support — Rock Paper Scissors AI Duel</title>
+  <meta name="description" content="Support page for Rock Paper Scissors AI Duel." />
+  <style>
+    :root {
+      --bg1: #eef7ff;
+      --bg2: #f8f0ff;
+      --bg3: #fff8e8;
+      --card: rgba(255, 255, 255, 0.78);
+      --text: #1f2440;
+      --muted: #68708f;
+      --line: rgba(90, 105, 160, 0.18);
+      --blue: #5bbcff;
+      --purple: #9b7bff;
+      --pink: #ff8bd4;
+      --gold: #ffc94a;
+      --shadow: 0 24px 70px rgba(73, 88, 160, 0.18);
+    }
 
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 16% 12%, rgba(91, 188, 255, 0.36), transparent 28%),
+        radial-gradient(circle at 82% 8%, rgba(255, 139, 212, 0.30), transparent 28%),
+        radial-gradient(circle at 55% 92%, rgba(255, 201, 74, 0.28), transparent 34%),
+        linear-gradient(135deg, var(--bg1), var(--bg2) 55%, var(--bg3));
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .cloud {
+      position: fixed;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.55);
+      filter: blur(1px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .cloud.c1 { width: 220px; height: 68px; top: 88px; left: -60px; }
+    .cloud.c2 { width: 300px; height: 86px; top: 210px; right: -110px; }
+    .cloud.c3 { width: 180px; height: 58px; bottom: 90px; left: 8%; opacity: .55; }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: min(1040px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 44px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: white;
+      background: linear-gradient(135deg, var(--blue), var(--purple), var(--pink));
+      box-shadow: 0 12px 30px rgba(123, 112, 255, .28);
+    }
+
+    .brand-title {
+      font-weight: 850;
+      font-size: 18px;
+      line-height: 1.05;
+    }
+
+    .brand-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    select, .nav a {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 13px;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(73, 88, 160, 0.08);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hero {
+      border: 1px solid var(--line);
+      background: var(--card);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      padding: clamp(24px, 4vw, 46px);
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero:after {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      right: -70px;
+      top: -70px;
+      background: radial-gradient(circle, rgba(255,201,74,.42), transparent 67%);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255,139,212,.45);
+      background: rgba(255, 239, 250, .75);
+      color: #a72a78;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-weight: 800;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(32px, 5vw, 58px);
+      letter-spacing: -2px;
+      line-height: .96;
+    }
+
+    .lead {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.55;
+      max-width: 760px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.70);
+      backdrop-filter: blur(20px);
+      border-radius: 26px;
+      box-shadow: 0 18px 50px rgba(73, 88, 160, 0.12);
+      padding: clamp(20px, 3vw, 32px);
+      margin: 16px 0;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 25px;
+      letter-spacing: -.5px;
+    }
+
+    p, li {
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 15.8px;
+    }
+
+    ul { padding-left: 20px; }
+
+    a { color: #5a56d6; font-weight: 750; }
+
+    .contact-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(91,188,255,.18), rgba(155,123,255,.16), rgba(255,139,212,.16));
+      border: 1px solid var(--line);
+      margin: 10px 0 4px;
+      font-weight: 850;
+    }
+
+    .notice {
+      border-left: 5px solid var(--pink);
+      background: rgba(255, 239, 250, .72);
+      padding: 14px 16px;
+      border-radius: 16px;
+      color: #72345b;
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    footer {
+      color: var(--muted);
+      text-align: center;
+      padding: 22px 0 8px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      header { align-items: flex-start; flex-direction: column; }
+      .controls { justify-content: flex-start; width: 100%; }
+      select { width: 100%; }
+      .nav a { flex: 1; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+
+  <main class="shell">
+    <header>
+      <a class="brand" href="https://tonytyap.github.io/rps/support.html">
+        <div class="logo">RPS</div>
+        <div>
+          <div class="brand-title">Rock Paper Scissors AI Duel</div>
+          <div class="brand-subtitle">Premium Soft Arcade Game</div>
+        </div>
+      </a>
+
+      <div class="controls">
+        <select id="langSelect" aria-label="Select language"></select>
+        <nav class="nav">
+          <a href="https://tonytyap.github.io/rps/terms.html">Terms</a>
+          <a href="https://tonytyap.github.io/rps/privacy.html">Privacy</a>
+          <a href="https://tonytyap.github.io/rps/support.html">Support</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="badge" id="badge"></div>
+      <h1 id="title"></h1>
+      <p class="lead" id="subtitle"></p>
+    </section>
+
+    <section class="card" id="content"></section>
+
+    <footer>
+      © <span id="year"></span> Rock Paper Scissors AI Duel. All rights reserved.
+      <br />
+      Contact: <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a>
+    </footer>
+  </main>
+
+  <script>
+    const LANGS = {
+      en: "English",
+      ru: "Русский",
+      ja: "日本語",
+      zh: "简体中文",
+      ko: "한국어",
+      pt: "Português",
+      es: "Español",
+      fr: "Français",
+      de: "Deutsch",
+      it: "Italiano",
+      nl: "Nederlands"
+    };
+
+    const DATA = {
+      en: {
+        badge: "Support",
+        title: "How can we help?",
+        subtitle: "Support page for Rock Paper Scissors AI Duel.",
+        html: `
+          <h2>Contact Support</h2>
+          <p>If you need help with Rock Paper Scissors AI Duel, contact us by email:</p>
+          <p class="contact-box">📩 <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+
+          <h2>What to include</h2>
+          <ul>
+            <li>Your device model.</li>
+            <li>Your iOS version.</li>
+            <li>Your app version.</li>
+            <li>A short description of the issue.</li>
+            <li>Screenshots or screen recording if helpful.</li>
+          </ul>
+
+          <h2>Purchases</h2>
+          <p>In-app purchases are processed by Apple through the App Store. If you have a payment or refund issue, please also check your Apple purchase history and App Store support options.</p>
+
+          <h2>Virtual Coins</h2>
+          <div class="notice">Coins and rewards in the App are virtual entertainment items only. They have no real-world value and cannot be withdrawn, exchanged, transferred, or redeemed for money, prizes, gift cards, crypto, NFTs, physical goods, or any real-world value.</div>
+
+          <h2>Useful Links</h2>
+          <ul>
+            <li><a href="https://tonytyap.github.io/rps/privacy.html">Privacy Policy</a></li>
+            <li><a href="https://tonytyap.github.io/rps/terms.html">Terms of Use / EULA</a></li>
+          </ul>
+        `
+      },
+
+      ru: {
+        badge: "Поддержка",
+        title: "Как мы можем помочь?",
+        subtitle: "Страница поддержки для Камень Ножницы Бумага AI Дуэль.",
+        html: `
+          <h2>Связаться с поддержкой</h2>
+          <p>Если вам нужна помощь с приложением, напишите нам на email:</p>
+          <p class="contact-box">📩 <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+
+          <h2>Что указать в письме</h2>
+          <ul>
+            <li>Модель устройства.</li>
+            <li>Версию iOS.</li>
+            <li>Версию приложения.</li>
+            <li>Краткое описание проблемы.</li>
+            <li>Скриншоты или запись экрана, если это поможет.</li>
+          </ul>
+
+          <h2>Покупки</h2>
+          <p>Встроенные покупки обрабатываются Apple через App Store. Если у вас вопрос по оплате или возврату, проверьте историю покупок Apple и варианты поддержки App Store.</p>
+
+          <h2>Виртуальные монеты</h2>
+          <div class="notice">Монеты и награды в приложении являются только виртуальными развлекательными предметами. Они не имеют реальной ценности и не могут быть выведены, обменяны, переданы или использованы для получения денег, призов, подарочных карт, криптовалюты, NFT, физических товаров или любой реальной ценности.</div>
+
+          <h2>Полезные ссылки</h2>
+          <ul>
+            <li><a href="https://tonytyap.github.io/rps/privacy.html">Политика конфиденциальности</a></li>
+            <li><a href="https://tonytyap.github.io/rps/terms.html">Условия использования / EULA</a></li>
+          </ul>
+        `
+      },
+
+      ja: {
+        badge: "サポート",
+        title: "サポート",
+        subtitle: "じゃんけんAIデュエルのサポートページです。",
+        html: `
+          <h2>お問い合わせ</h2>
+          <p>サポートが必要な場合は、以下のメールアドレスまでご連絡ください。</p>
+          <p class="contact-box">📩 <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+
+          <h2>メールに含める内容</h2>
+          <ul>
+            <li>デバイスのモデル。</li>
+            <li>iOSのバージョン。</li>
+            <li>アプリのバージョン。</li>
+            <li>問題の簡単な説明。</li>
+            <li>必要に応じてスクリーンショットまたは画面録画。</li>
+          </ul>
+
+          <h2>購入について</h2>
+          <p>アプリ内購入はApple App Storeを通じて処理されます。支払いまたは返金に関する問題がある場合は、Appleの購入履歴およびApp Storeサポートもご確認ください。</p>
+
+          <h2>バーチャルコイン</h2>
+          <div class="notice">アプリ内のコインと報酬は娯楽用のバーチャルアイテムです。現実世界での価値はなく、現金、賞品、ギフトカード、暗号資産、NFT、物理的商品、その他の現実価値と交換、引き出し、譲渡、換金することはできません。</div>
+
+          <h2>リンク</h2>
+          <ul>
+            <li><a href="https://tonytyap.github.io/rps/privacy.html">プライバシーポリシー</a></li>
+            <li><a href="https://tonytyap.github.io/rps/terms.html">利用規約 / EULA</a></li>
+          </ul>
+        `
+      },
+
+      zh: {
+        badge: "支持",
+        title: "我们可以如何帮助？",
+        subtitle: "石头剪刀布AI对决支持页面。",
+        html: `
+          <h2>联系支持</h2>
+          <p>如果您需要帮助，请通过电子邮件联系我们：</p>
+          <p class="contact-box">📩 <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+
+          <h2>请在邮件中提供</h2>
+          <ul>
+            <li>设备型号。</li>
+            <li>iOS 版本。</li>
+            <li>应用版本。</li>
+            <li>问题的简短描述。</li>
+            <li>如有帮助，可附上截图或录屏。</li>
+          </ul>
+
+          <h2>购买</h2>
+          <p>应用内购买由 Apple 通过 App Store 处理。如有付款或退款问题，也请查看 Apple 购买记录和 App Store 支持选项。</p>
+
+          <h2>虚拟金币</h2>
+          <div class="notice">应用中的金币和奖励仅为娱乐用途的虚拟物品，没有现实世界价值，不能提现、兑换、转让，也不能用于兑换现金、奖品、礼品卡、加密货币、NFT、实物商品或任何现实价值。</div>
+
+          <h2>有用链接</h2>
+          <ul>
+            <li><a href="https://tonytyap.github.io/rps/privacy.html">隐私政策</a></li>
+            <li><a href="https://tonytyap.github.io/rps/terms.html">使用条款 / EULA</a></li>
+          </ul>
+        `
+      },
+
+      ko: {
+        badge: "지원",
+        title: "무엇을 도와드릴까요?",
+        subtitle: "가위바위보 AI 듀얼 지원 페이지입니다.",
+        html: `
+          <h2>지원 문의</h2>
+          <p>도움이 필요하면 이메일로 문의해주세요:</p>
+          <p class="contact-box">📩 <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+
+          <h2>메일에 포함할 내용</h2>
+          <ul>
+            <li>기기 모델.</li>
+            <li>iOS 버전.</li>
+            <li>앱 버전.</li>
+            <li>문제에 대한 간단한 설명.</li>
+            <li>필요한 경우 스크린샷 또는 화면 녹화.</li>
+          </ul>
+
+          <h2>구매</h2>
+          <p>앱 내 구매는 Apple App Store를 통해 처리됩니다. 결제 또는 환불 문제가 있는 경우 Apple 구매 내역과 App Store 지원 옵션도 확인해주세요.</p>
+
+          <h2>가상 코인</h2>
+          <div class="notice">앱의 코인과 보상은 오락용 가상 아이템입니다. 현실 세계의 가치가 없으며 현금, 상품, 기프트 카드, 암호화폐, NFT, 실물 상품 또는 현실 가치로 인출, 교환, 양도, 환전할 수 없습니다.</div>
+
+          <h2>유용한 링크</h2>
+          <ul>
+            <li><a href="https://tonytyap.github.io/rps/privacy.html">개인정보 처리방침</a></li>
+            <li><a href="https://tonytyap.github.io/rps/terms.html">이용약관 / EULA</a></li>
+          </ul>
+        `
+      },
+
+      pt: {
+        badge: "Suporte",
+        title: "Como podemos ajudar?",
+        subtitle: "Página de suporte de Pedra Papel Tesoura Duelo IA.",
+        html: `
+          <h2>Contato de suporte</h2>
+          <p>Se precisar de ajuda com o aplicativo, envie um email para:</p>
+          <p class="contact-box">📩 <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+
+          <h2>O que incluir</h2>
+          <ul>
+            <li>Modelo do dispositivo.</li>
+            <li>Versão do iOS.</li>
+            <li>Versão do aplicativo.</li>
+            <li>Breve descrição do problema.</li>
+            <li>Capturas de tela ou gravação, se ajudar.</li>
+          </ul>
+
+          <h2>Compras</h2>
+          <p>Compras no app são processadas pela Apple por meio da App Store. Se houver problema de pagamento ou reembolso, verifique também seu histórico de compras da Apple e as opções de suporte da App Store.</p>
+
+          <h2>Moedas virtuais</h2>
+          <div class="notice">Moedas e recompensas no app são itens virtuais apenas para entretenimento. Elas não têm valor real e não podem ser sacadas, trocadas, transferidas ou resgatadas por dinheiro, prêmios, cartões-presente, criptomoedas, NFTs, produtos físicos ou qualquer valor real.</div>
+
+          <h2>Links úteis</h2>
+          <ul>
+            <li><a href="https://tonytyap.github.io/rps/privacy.html">Política de Privacidade</a></li>
+            <li><a href="https://tonytyap.github.io/rps/terms.html">Termos de Uso / EULA</a></li>
+          </ul>
+        `
+      },
+
+      es: {
+        badge: "Soporte",
+        title: "¿Cómo podemos ayudar?",
+        subtitle: "Página de soporte de Piedra Papel Tijera Duelo IA.",
+        html: `
+          <h2>Contactar soporte</h2>
+          <p>Si necesitas ayuda con la aplicación, escríbenos por email:</p>
+          <p class="contact-box">📩 <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+
+          <h2>Qué incluir</h2>
+          <ul>
+            <li>Modelo del dispositivo.</li>
+            <li>Versión de iOS.</li>
+            <li>Versión de la app.</li>
+            <li>Breve descripción del problema.</li>
+            <li>Capturas o grabación de pantalla si ayudan.</li>
+          </ul>
+
+          <h2>Compras</h2>
+          <p>Las compras dentro de la app son procesadas por Apple a través de App Store. Si tienes un problema de pago o reembolso, revisa también tu historial de compras de Apple y las opciones de soporte de App Store.</p>
+
+          <h2>Monedas virtuales</h2>
+          <div class="notice">Las monedas y recompensas de la app son objetos virtuales solo para entretenimiento. No tienen valor real y no pueden retirarse, intercambiarse, transferirse ni canjearse por dinero, premios, tarjetas regalo, criptomonedas, NFT, productos físicos ni ningún valor real.</div>
+
+          <h2>Enlaces útiles</h2>
+          <ul>
+            <li><a href="https://tonytyap.github.io/rps/privacy.html">Política de privacidad</a></li>
+            <li><a href="https://tonytyap.github.io/rps/terms.html">Términos de uso / EULA</a></li>
+          </ul>
+        `
+      },
+
+      fr: {
+        badge: "Support",
+        title: "Comment pouvons-nous aider ?",
+        subtitle: "Page de support de Pierre Feuille Ciseaux Duel IA.",
+        html: `
+          <h2>Contacter le support</h2>
+          <p>Si vous avez besoin d’aide avec l’application, contactez-nous par email:</p>
+          <p class="contact-box">📩 <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+
+          <h2>À inclure</h2>
+          <ul>
+            <li>Modèle de l’appareil.</li>
+            <li>Version d’iOS.</li>
+            <li>Version de l’application.</li>
+            <li>Brève description du problème.</li>
+            <li>Captures d’écran ou enregistrement si utile.</li>
+          </ul>
+
+          <h2>Achats</h2>
+          <p>Les achats intégrés sont traités par Apple via l’App Store. En cas de problème de paiement ou de remboursement, consultez aussi votre historique d’achats Apple et les options de support de l’App Store.</p>
+
+          <h2>Pièces virtuelles</h2>
+          <div class="notice">Les pièces et récompenses de l’application sont des objets virtuels uniquement destinés au divertissement. Elles n’ont aucune valeur réelle et ne peuvent pas être retirées, échangées, transférées ou converties en argent, prix, cartes cadeaux, crypto, NFT, biens physiques ou toute valeur réelle.</div>
+
+          <h2>Liens utiles</h2>
+          <ul>
+            <li><a href="https://tonytyap.github.io/rps/privacy.html">Politique de confidentialité</a></li>
+            <li><a href="https://tonytyap.github.io/rps/terms.html">Conditions d’utilisation / EULA</a></li>
+          </ul>
+        `
+      },
+
+      de: {
+        badge: "Support",
+        title: "Wie können wir helfen?",
+        subtitle: "Support-Seite für Schere Stein Papier KI Duell.",
+        html: `
+          <h2>Support kontaktieren</h2>
+          <p>Wenn Sie Hilfe mit der App benötigen, schreiben Sie uns per E-Mail:</p>
+          <p class="contact-box">📩 <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+
+          <h2>Bitte angeben</h2>
+          <ul>
+            <li>Gerätemodell.</li>
+            <li>iOS-Version.</li>
+            <li>App-Version.</li>
+            <li>Kurze Beschreibung des Problems.</li>
+            <li>Screenshots oder Bildschirmaufnahme, falls hilfreich.</li>
+          </ul>
+
+          <h2>Käufe</h2>
+          <p>In-App-Käufe werden von Apple über den App Store verarbeitet. Bei Zahlungs- oder Rückerstattungsproblemen prüfen Sie bitte auch Ihre Apple-Kaufhistorie und die Support-Optionen des App Store.</p>
+
+          <h2>Virtuelle Münzen</h2>
+          <div class="notice">Münzen und Belohnungen in der App sind virtuelle Unterhaltungsgegenstände. Sie haben keinen realen Wert und können nicht ausgezahlt, getauscht, übertragen oder gegen Geld, Preise, Geschenkkarten, Kryptowährungen, NFTs, physische Waren oder reale Werte eingelöst werden.</div>
+
+          <h2>Nützliche Links</h2>
+          <ul>
+            <li><a href="https://tonytyap.github.io/rps/privacy.html">Datenschutzerklärung</a></li>
+            <li><a href="https://tonytyap.github.io/rps/terms.html">Nutzungsbedingungen / EULA</a></li>
+          </ul>
+        `
+      },
+
+      it: {
+        badge: "Supporto",
+        title: "Come possiamo aiutarti?",
+        subtitle: "Pagina di supporto di Sasso Carta Forbici Duello IA.",
+        html: `
+          <h2>Contatta il supporto</h2>
+          <p>Se hai bisogno di aiuto con l’app, scrivici via email:</p>
+          <p class="contact-box">📩 <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+
+          <h2>Cosa includere</h2>
+          <ul>
+            <li>Modello del dispositivo.</li>
+            <li>Versione di iOS.</li>
+            <li>Versione dell’app.</li>
+            <li>Breve descrizione del problema.</li>
+            <li>Screenshot o registrazione dello schermo, se utile.</li>
+          </ul>
+
+          <h2>Acquisti</h2>
+          <p>Gli acquisti in-app sono elaborati da Apple tramite App Store. Per problemi di pagamento o rimborso, controlla anche la cronologia acquisti Apple e le opzioni di supporto App Store.</p>
+
+          <h2>Monete virtuali</h2>
+          <div class="notice">Le monete e ricompense nell’app sono oggetti virtuali solo per intrattenimento. Non hanno valore reale e non possono essere prelevate, scambiate, trasferite o riscattate per denaro, premi, buoni regalo, criptovalute, NFT, beni fisici o qualsiasi valore reale.</div>
+
+          <h2>Link utili</h2>
+          <ul>
+            <li><a href="https://tonytyap.github.io/rps/privacy.html">Informativa sulla privacy</a></li>
+            <li><a href="https://tonytyap.github.io/rps/terms.html">Termini di utilizzo / EULA</a></li>
+          </ul>
+        `
+      },
+
+      nl: {
+        badge: "Support",
+        title: "Hoe kunnen we helpen?",
+        subtitle: "Supportpagina voor Steen Papier Schaar AI Duel.",
+        html: `
+          <h2>Neem contact op</h2>
+          <p>Als je hulp nodig hebt met de app, mail ons:</p>
+          <p class="contact-box">📩 <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+
+          <h2>Vermeld in je bericht</h2>
+          <ul>
+            <li>Apparaatmodel.</li>
+            <li>iOS-versie.</li>
+            <li>Appversie.</li>
+            <li>Korte beschrijving van het probleem.</li>
+            <li>Screenshots of schermopname indien nuttig.</li>
+          </ul>
+
+          <h2>Aankopen</h2>
+          <p>In-app aankopen worden door Apple via de App Store verwerkt. Bij betalings- of terugbetalingsproblemen kun je ook je Apple-aankoopgeschiedenis en App Store-supportopties bekijken.</p>
+
+          <h2>Virtuele munten</h2>
+          <div class="notice">Munten en beloningen in de app zijn virtuele entertainmentitems. Ze hebben geen echte waarde en kunnen niet worden opgenomen, geruild, overgedragen of ingewisseld voor geld, prijzen, cadeaubonnen, crypto, NFT’s, fysieke goederen of enige echte waarde.</div>
+
+          <h2>Nuttige links</h2>
+          <ul>
+            <li><a href="https://tonytyap.github.io/rps/privacy.html">Privacybeleid</a></li>
+            <li><a href="https://tonytyap.github.io/rps/terms.html">Gebruiksvoorwaarden / EULA</a></li>
+          </ul>
+        `
+      }
+    };
+
+    const select = document.getElementById("langSelect");
+    Object.entries(LANGS).forEach(([code, label]) => {
+      const option = document.createElement("option");
+      option.value = code;
+      option.textContent = label;
+      select.appendChild(option);
+    });
+
+    function getInitialLang() {
+      const saved = localStorage.getItem("rps_lang");
+      if (saved && DATA[saved]) return saved;
+      const browser = (navigator.language || "en").slice(0, 2);
+      return DATA[browser] ? browser : "en";
+    }
+
+    function render(lang) {
+      const data = DATA[lang] || DATA.en;
+      document.documentElement.lang = lang;
+      document.getElementById("badge").textContent = data.badge;
+      document.getElementById("title").textContent = data.title;
+      document.getElementById("subtitle").textContent = data.subtitle;
+      document.getElementById("content").innerHTML = data.html;
+      select.value = lang;
+      localStorage.setItem("rps_lang", lang);
+    }
+
+    select.addEventListener("change", (e) => render(e.target.value));
+    document.getElementById("year").textContent = new Date().getFullYear();
+    render(getInitialLang());
+  </script>
+</body>
+</html>
