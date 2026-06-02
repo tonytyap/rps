@@ -1,1 +1,930 @@
+<!-- terms.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Use / EULA — Rock Paper Scissors AI Duel</title>
+  <meta name="description" content="Terms of Use and End User License Agreement for Rock Paper Scissors AI Duel." />
+  <style>
+    :root {
+      --bg1: #eef7ff;
+      --bg2: #f8f0ff;
+      --bg3: #fff8e8;
+      --card: rgba(255, 255, 255, 0.78);
+      --text: #1f2440;
+      --muted: #68708f;
+      --line: rgba(90, 105, 160, 0.18);
+      --blue: #5bbcff;
+      --purple: #9b7bff;
+      --pink: #ff8bd4;
+      --gold: #ffc94a;
+      --shadow: 0 24px 70px rgba(73, 88, 160, 0.18);
+    }
 
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 16% 12%, rgba(91, 188, 255, 0.36), transparent 28%),
+        radial-gradient(circle at 82% 8%, rgba(255, 139, 212, 0.30), transparent 28%),
+        radial-gradient(circle at 55% 92%, rgba(255, 201, 74, 0.28), transparent 34%),
+        linear-gradient(135deg, var(--bg1), var(--bg2) 55%, var(--bg3));
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .cloud {
+      position: fixed;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.55);
+      filter: blur(1px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .cloud.c1 { width: 220px; height: 68px; top: 88px; left: -60px; }
+    .cloud.c2 { width: 300px; height: 86px; top: 210px; right: -110px; }
+    .cloud.c3 { width: 180px; height: 58px; bottom: 90px; left: 8%; opacity: .55; }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: min(1040px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 44px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: white;
+      background: linear-gradient(135deg, var(--blue), var(--purple), var(--pink));
+      box-shadow: 0 12px 30px rgba(123, 112, 255, .28);
+    }
+
+    .brand-title {
+      font-weight: 850;
+      font-size: 18px;
+      line-height: 1.05;
+    }
+
+    .brand-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    select, .nav a {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 13px;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(73, 88, 160, 0.08);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hero {
+      border: 1px solid var(--line);
+      background: var(--card);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      padding: clamp(24px, 4vw, 46px);
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero:after {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      right: -70px;
+      top: -70px;
+      background: radial-gradient(circle, rgba(255,201,74,.42), transparent 67%);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255,201,74,.55);
+      background: rgba(255, 248, 218, .75);
+      color: #9a6a00;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-weight: 800;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(32px, 5vw, 58px);
+      letter-spacing: -2px;
+      line-height: .96;
+    }
+
+    .lead {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.55;
+      max-width: 760px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.70);
+      backdrop-filter: blur(20px);
+      border-radius: 26px;
+      box-shadow: 0 18px 50px rgba(73, 88, 160, 0.12);
+      padding: clamp(20px, 3vw, 32px);
+      margin: 16px 0;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 25px;
+      letter-spacing: -.5px;
+    }
+
+    h3 {
+      margin: 22px 0 8px;
+      font-size: 18px;
+    }
+
+    p, li {
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 15.8px;
+    }
+
+    ul { padding-left: 20px; }
+
+    a { color: #5a56d6; font-weight: 750; }
+
+    .notice {
+      border-left: 5px solid var(--gold);
+      background: rgba(255, 248, 218, .72);
+      padding: 14px 16px;
+      border-radius: 16px;
+      color: #745000;
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    footer {
+      color: var(--muted);
+      text-align: center;
+      padding: 22px 0 8px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      header { align-items: flex-start; flex-direction: column; }
+      .controls { justify-content: flex-start; width: 100%; }
+      select { width: 100%; }
+      .nav a { flex: 1; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+
+  <main class="shell">
+    <header>
+      <a class="brand" href="https://tonytyap.github.io/rps/support.html">
+        <div class="logo">RPS</div>
+        <div>
+          <div class="brand-title">Rock Paper Scissors AI Duel</div>
+          <div class="brand-subtitle">Premium Soft Arcade Game</div>
+        </div>
+      </a>
+
+      <div class="controls">
+        <select id="langSelect" aria-label="Select language"></select>
+        <nav class="nav">
+          <a href="https://tonytyap.github.io/rps/terms.html">Terms</a>
+          <a href="https://tonytyap.github.io/rps/privacy.html">Privacy</a>
+          <a href="https://tonytyap.github.io/rps/support.html">Support</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="badge" id="badge"></div>
+      <h1 id="title"></h1>
+      <p class="lead" id="subtitle"></p>
+    </section>
+
+    <section class="card" id="content"></section>
+
+    <footer>
+      © <span id="year"></span> Rock Paper Scissors AI Duel. All rights reserved.
+      <br />
+      Contact: <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a>
+    </footer>
+  </main>
+
+  <script>
+    const LANGS = {
+      en: "English",
+      ru: "Русский",
+      ja: "日本語",
+      zh: "简体中文",
+      ko: "한국어",
+      pt: "Português",
+      es: "Español",
+      fr: "Français",
+      de: "Deutsch",
+      it: "Italiano",
+      nl: "Nederlands"
+    };
+
+    const DATA = {
+      en: {
+        badge: "Terms of Use / EULA",
+        title: "Terms of Use",
+        subtitle: "Please read these terms before using Rock Paper Scissors AI Duel.",
+        html: `
+          <p><strong>Effective date:</strong> June 2, 2026</p>
+
+          <h2>1. Agreement</h2>
+          <p>These Terms of Use and End User License Agreement (“Terms”) apply to your use of Rock Paper Scissors AI Duel (“App”, “we”, “us”, or “our”). By downloading, accessing, or using the App, you agree to these Terms.</p>
+          <p>If you do not agree, please do not use the App.</p>
+
+          <h2>2. App Purpose</h2>
+          <p>The App is a casual mobile game based on Rock Paper Scissors. It includes AI opponents, virtual coins, arcade-style game modes, daily rewards, achievements, statistics, and optional in-app purchases.</p>
+
+          <h2>3. Virtual Coins and Rewards</h2>
+          <div class="notice"><strong>Important:</strong> Coins, rewards, points, multipliers, and other in-app items are virtual entertainment items only. They have no real-world value.</div>
+          <ul>
+            <li>Virtual coins cannot be withdrawn.</li>
+            <li>Virtual coins cannot be exchanged for money, prizes, gift cards, cryptocurrency, NFTs, physical goods, or any real-world value.</li>
+            <li>Virtual coins cannot be transferred to another person outside the App.</li>
+            <li>The App does not offer real-money gambling, betting, cash prizes, or real-world rewards.</li>
+          </ul>
+
+          <h2>4. Game Modes</h2>
+          <p>The App may include Classic Mode, Coin Battle, Double Mode, achievements, daily rewards, and other arcade-style features. These features are designed for entertainment only.</p>
+
+          <h2>5. In-App Purchases</h2>
+          <p>The App may offer optional consumable virtual coin packs, rewarded features, or non-consumable items such as Remove Ads. Purchases are processed by Apple through the App Store.</p>
+          <p>All purchases are subject to Apple’s payment terms, refund rules, and App Store policies. We do not control Apple’s payment processing or refund decisions.</p>
+
+          <h2>6. Ads and Rewards</h2>
+          <p>The App may include ads, including rewarded ads. Rewarded ads may provide virtual coins or other virtual in-app items. These rewards are for in-app entertainment only and have no real-world value.</p>
+
+          <h2>7. Acceptable Use</h2>
+          <p>You agree not to misuse the App, interfere with its operation, exploit bugs, attempt unauthorized access, reverse engineer the App where prohibited by law, or use the App for unlawful purposes.</p>
+
+          <h2>8. Availability and Changes</h2>
+          <p>We may update, modify, suspend, or discontinue parts of the App at any time. We may also adjust game balance, rewards, virtual coins, features, and content to improve the experience or comply with platform requirements.</p>
+
+          <h2>9. No Warranty</h2>
+          <p>The App is provided “as is” and “as available.” We do not guarantee that the App will be uninterrupted, error-free, or available at all times.</p>
+
+          <h2>10. Limitation of Liability</h2>
+          <p>To the maximum extent permitted by law, we are not liable for indirect, incidental, special, consequential, or punitive damages arising from your use of the App.</p>
+
+          <h2>11. Apple App Store</h2>
+          <p>If you downloaded the App from the Apple App Store, you acknowledge that Apple is not responsible for the App or its content. Apple and its subsidiaries are third-party beneficiaries of these Terms and may enforce them against you where applicable.</p>
+
+          <h2>12. Privacy</h2>
+          <p>Your use of the App is also governed by our Privacy Policy: <a href="https://tonytyap.github.io/rps/privacy.html">https://tonytyap.github.io/rps/privacy.html</a></p>
+
+          <h2>13. Contact</h2>
+          <p>If you have questions about these Terms, contact us at <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a>.</p>
+        `
+      },
+
+      ru: {
+        badge: "Условия использования / EULA",
+        title: "Условия использования",
+        subtitle: "Перед использованием приложения Камень Ножницы Бумага AI Дуэль ознакомьтесь с этими условиями.",
+        html: `
+          <p><strong>Дата вступления в силу:</strong> 2 июня 2026 г.</p>
+          <h2>1. Соглашение</h2>
+          <p>Эти Условия использования и Лицензионное соглашение конечного пользователя (“Условия”) регулируют использование приложения Камень Ножницы Бумага AI Дуэль (“Приложение”, “мы”, “нас”). Используя Приложение, вы соглашаетесь с этими Условиями.</p>
+          <p>Если вы не согласны с Условиями, пожалуйста, не используйте Приложение.</p>
+
+          <h2>2. Назначение приложения</h2>
+          <p>Приложение является казуальной мобильной игрой по правилам Камень Ножницы Бумага. В нём могут быть AI-соперники, виртуальные монеты, игровые режимы, ежедневные награды, достижения, статистика и необязательные встроенные покупки.</p>
+
+          <h2>3. Виртуальные монеты и награды</h2>
+          <div class="notice"><strong>Важно:</strong> монеты, награды, очки, множители и другие внутриигровые предметы являются только виртуальными развлекательными предметами и не имеют реальной ценности.</div>
+          <ul>
+            <li>Виртуальные монеты нельзя вывести.</li>
+            <li>Виртуальные монеты нельзя обменять на деньги, призы, подарочные карты, криптовалюту, NFT, физические товары или любую реальную ценность.</li>
+            <li>Виртуальные монеты нельзя передать другому человеку вне Приложения.</li>
+            <li>Приложение не предлагает азартные игры на реальные деньги, ставки, денежные призы или реальные награды.</li>
+          </ul>
+
+          <h2>4. Игровые режимы</h2>
+          <p>Приложение может включать Classic Mode, Coin Battle, Double Mode, достижения, ежедневные награды и другие аркадные функции. Все они предназначены только для развлечения.</p>
+
+          <h2>5. Встроенные покупки</h2>
+          <p>Приложение может предлагать необязательные покупки виртуальных монет, рекламные награды или непотребляемые покупки, например Remove Ads. Покупки обрабатываются Apple через App Store.</p>
+          <p>Все покупки регулируются платёжными условиями, правилами возвратов и политиками Apple App Store.</p>
+
+          <h2>6. Реклама и награды</h2>
+          <p>В Приложении может быть реклама, включая рекламу с вознаграждением. Вознаграждения могут выдавать виртуальные монеты или другие виртуальные предметы только для использования внутри Приложения.</p>
+
+          <h2>7. Допустимое использование</h2>
+          <p>Вы соглашаетесь не злоупотреблять Приложением, не вмешиваться в его работу, не использовать ошибки, не получать несанкционированный доступ и не использовать Приложение в незаконных целях.</p>
+
+          <h2>8. Доступность и изменения</h2>
+          <p>Мы можем обновлять, изменять, приостанавливать или прекращать работу отдельных функций Приложения. Также мы можем изменять баланс игры, награды, виртуальные монеты и контент.</p>
+
+          <h2>9. Отсутствие гарантий</h2>
+          <p>Приложение предоставляется “как есть” и “по мере доступности”. Мы не гарантируем бесперебойную или безошибочную работу.</p>
+
+          <h2>10. Ограничение ответственности</h2>
+          <p>В максимальной степени, разрешённой законом, мы не несём ответственности за косвенные, случайные, специальные или последующие убытки, связанные с использованием Приложения.</p>
+
+          <h2>11. Apple App Store</h2>
+          <p>Если вы загрузили Приложение из Apple App Store, вы признаёте, что Apple не несёт ответственности за Приложение или его содержимое. Apple и её дочерние компании могут быть сторонними бенефициарами этих Условий.</p>
+
+          <h2>12. Конфиденциальность</h2>
+          <p>Использование Приложения также регулируется нашей Политикой конфиденциальности: <a href="https://tonytyap.github.io/rps/privacy.html">https://tonytyap.github.io/rps/privacy.html</a></p>
+
+          <h2>13. Контакты</h2>
+          <p>Вопросы можно отправить на <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a>.</p>
+        `
+      },
+
+      ja: {
+        badge: "利用規約 / EULA",
+        title: "利用規約",
+        subtitle: "じゃんけんAIデュエルをご利用になる前に、この規約をお読みください。",
+        html: `
+          <p><strong>発効日:</strong> 2026年6月2日</p>
+          <h2>1. 同意</h2>
+          <p>この利用規約およびエンドユーザーライセンス契約（「本規約」）は、じゃんけんAIデュエル（「本アプリ」）の利用に適用されます。本アプリを利用することで、本規約に同意したものとみなされます。</p>
+          <p>同意しない場合は、本アプリを利用しないでください。</p>
+
+          <h2>2. アプリの目的</h2>
+          <p>本アプリは、じゃんけんをベースにしたカジュアルモバイルゲームです。AI対戦相手、バーチャルコイン、ゲームモード、デイリー報酬、実績、統計、任意のアプリ内購入を含む場合があります。</p>
+
+          <h2>3. バーチャルコインと報酬</h2>
+          <div class="notice"><strong>重要:</strong> コイン、報酬、ポイント、倍率、その他のアプリ内アイテムは、娯楽目的のバーチャルアイテムであり、現実世界での価値はありません。</div>
+          <ul>
+            <li>バーチャルコインを引き出すことはできません。</li>
+            <li>現金、賞品、ギフトカード、暗号資産、NFT、物理的な商品、その他の現実価値と交換することはできません。</li>
+            <li>本アプリ外で他者へ譲渡することはできません。</li>
+            <li>本アプリは、現実のお金を使うギャンブル、賭け、現金賞品、現実世界の報酬を提供しません。</li>
+          </ul>
+
+          <h2>4. ゲームモード</h2>
+          <p>本アプリには、Classic Mode、Coin Battle、Double Mode、実績、デイリー報酬、その他のアーケード機能が含まれる場合があります。これらは娯楽目的のみです。</p>
+
+          <h2>5. アプリ内購入</h2>
+          <p>本アプリでは、バーチャルコインパック、報酬機能、広告削除などの任意のアプリ内購入を提供する場合があります。購入はApple App Storeを通じて処理されます。</p>
+          <p>すべての購入は、Appleの支払い条件、返金規則、App Storeポリシーに従います。</p>
+
+          <h2>6. 広告と報酬</h2>
+          <p>本アプリには広告が含まれる場合があります。リワード広告により、バーチャルコインまたはその他のバーチャルアイテムが付与される場合があります。</p>
+
+          <h2>7. 適切な利用</h2>
+          <p>本アプリの不正利用、動作妨害、バグの悪用、不正アクセス、法律で禁止されるリバースエンジニアリング、違法目的での利用は禁止されています。</p>
+
+          <h2>8. 変更と提供</h2>
+          <p>当社は、本アプリの機能、ゲームバランス、報酬、バーチャルコイン、コンテンツを変更、停止、終了する場合があります。</p>
+
+          <h2>9. 保証の否認</h2>
+          <p>本アプリは「現状有姿」および「提供可能な範囲」で提供されます。常に中断なく、またはエラーなく動作することを保証しません。</p>
+
+          <h2>10. 責任の制限</h2>
+          <p>法律で認められる最大限の範囲において、当社は本アプリの利用に関連する間接的、偶発的、特別、結果的損害について責任を負いません。</p>
+
+          <h2>11. Apple App Store</h2>
+          <p>Apple App Storeから本アプリを入手した場合、Appleは本アプリまたはその内容について責任を負わないことを了承するものとします。</p>
+
+          <h2>12. プライバシー</h2>
+          <p>本アプリの利用にはプライバシーポリシーも適用されます: <a href="https://tonytyap.github.io/rps/privacy.html">https://tonytyap.github.io/rps/privacy.html</a></p>
+
+          <h2>13. お問い合わせ</h2>
+          <p>お問い合わせ: <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+        `
+      },
+
+      zh: {
+        badge: "使用条款 / EULA",
+        title: "使用条款",
+        subtitle: "使用石头剪刀布AI对决前，请阅读这些条款。",
+        html: `
+          <p><strong>生效日期:</strong> 2026年6月2日</p>
+          <h2>1. 协议</h2>
+          <p>本使用条款和最终用户许可协议（“条款”）适用于您使用石头剪刀布AI对决（“本应用”）。下载、访问或使用本应用，即表示您同意这些条款。</p>
+          <p>如果您不同意，请不要使用本应用。</p>
+
+          <h2>2. 应用用途</h2>
+          <p>本应用是一款基于石头剪刀布规则的休闲手机游戏，可能包含 AI 对手、虚拟金币、游戏模式、每日奖励、成就、统计数据和可选应用内购买。</p>
+
+          <h2>3. 虚拟金币和奖励</h2>
+          <div class="notice"><strong>重要:</strong> 金币、奖励、积分、倍数和其他应用内物品仅为娱乐用途的虚拟物品，没有现实世界价值。</div>
+          <ul>
+            <li>虚拟金币不能提现。</li>
+            <li>虚拟金币不能兑换现金、奖品、礼品卡、加密货币、NFT、实物商品或任何现实价值。</li>
+            <li>虚拟金币不能在应用外转让给他人。</li>
+            <li>本应用不提供真钱赌博、下注、现金奖励或现实世界奖励。</li>
+          </ul>
+
+          <h2>4. 游戏模式</h2>
+          <p>本应用可能包含 Classic Mode、Coin Battle、Double Mode、成就、每日奖励和其他街机功能。这些功能仅用于娱乐。</p>
+
+          <h2>5. 应用内购买</h2>
+          <p>本应用可能提供可选的虚拟金币包、奖励功能或移除广告等非消耗型项目。购买由 Apple 通过 App Store 处理。</p>
+          <p>所有购买均受 Apple 支付条款、退款规则和 App Store 政策约束。</p>
+
+          <h2>6. 广告和奖励</h2>
+          <p>本应用可能包含广告，包括激励广告。激励广告可能提供虚拟金币或其他虚拟应用内物品，仅供应用内娱乐使用。</p>
+
+          <h2>7. 可接受使用</h2>
+          <p>您同意不滥用本应用、不干扰其运行、不利用漏洞、不进行未经授权的访问、不在法律禁止的情况下进行逆向工程，也不将本应用用于非法目的。</p>
+
+          <h2>8. 可用性和更改</h2>
+          <p>我们可能随时更新、修改、暂停或停止本应用的部分功能，也可能调整游戏平衡、奖励、虚拟金币和内容。</p>
+
+          <h2>9. 无保证</h2>
+          <p>本应用按“现状”和“可用状态”提供。我们不保证本应用始终不中断、无错误或可用。</p>
+
+          <h2>10. 责任限制</h2>
+          <p>在法律允许的最大范围内，我们不对因使用本应用而产生的间接、偶然、特殊、后果性或惩罚性损害承担责任。</p>
+
+          <h2>11. Apple App Store</h2>
+          <p>如果您从 Apple App Store 下载本应用，您确认 Apple 不对本应用或其内容负责。</p>
+
+          <h2>12. 隐私</h2>
+          <p>您使用本应用也受我们的隐私政策约束: <a href="https://tonytyap.github.io/rps/privacy.html">https://tonytyap.github.io/rps/privacy.html</a></p>
+
+          <h2>13. 联系我们</h2>
+          <p>如有问题，请联系: <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+        `
+      },
+
+      ko: {
+        badge: "이용약관 / EULA",
+        title: "이용약관",
+        subtitle: "가위바위보 AI 듀얼을 사용하기 전에 본 약관을 읽어주세요.",
+        html: `
+          <p><strong>시행일:</strong> 2026년 6월 2일</p>
+          <h2>1. 동의</h2>
+          <p>본 이용약관 및 최종 사용자 라이선스 계약(“약관”)은 가위바위보 AI 듀얼(“앱”) 사용에 적용됩니다. 앱을 다운로드, 접근 또는 사용하면 본 약관에 동의하는 것입니다.</p>
+          <p>동의하지 않는 경우 앱을 사용하지 마세요.</p>
+
+          <h2>2. 앱 목적</h2>
+          <p>앱은 가위바위보를 기반으로 한 캐주얼 모바일 게임입니다. AI 상대, 가상 코인, 게임 모드, 데일리 보상, 업적, 통계 및 선택적 앱 내 구매가 포함될 수 있습니다.</p>
+
+          <h2>3. 가상 코인과 보상</h2>
+          <div class="notice"><strong>중요:</strong> 코인, 보상, 포인트, 배수 및 기타 앱 내 아이템은 오락용 가상 아이템일 뿐이며 현실 세계의 가치가 없습니다.</div>
+          <ul>
+            <li>가상 코인은 인출할 수 없습니다.</li>
+            <li>현금, 상품, 기프트 카드, 암호화폐, NFT, 실물 상품 또는 현실 가치로 교환할 수 없습니다.</li>
+            <li>앱 외부에서 다른 사람에게 양도할 수 없습니다.</li>
+            <li>앱은 실제 돈을 사용하는 도박, 베팅, 현금 상품 또는 현실 보상을 제공하지 않습니다.</li>
+          </ul>
+
+          <h2>4. 게임 모드</h2>
+          <p>앱에는 Classic Mode, Coin Battle, Double Mode, 업적, 데일리 보상 및 기타 아케이드 기능이 포함될 수 있습니다. 이러한 기능은 오락 목적입니다.</p>
+
+          <h2>5. 앱 내 구매</h2>
+          <p>앱은 선택적 가상 코인 팩, 보상 기능 또는 광고 제거와 같은 비소모성 아이템을 제공할 수 있습니다. 구매는 Apple App Store를 통해 처리됩니다.</p>
+          <p>모든 구매는 Apple의 결제 조건, 환불 규칙 및 App Store 정책의 적용을 받습니다.</p>
+
+          <h2>6. 광고와 보상</h2>
+          <p>앱에는 보상형 광고를 포함한 광고가 포함될 수 있습니다. 보상형 광고는 가상 코인 또는 기타 가상 아이템을 제공할 수 있습니다.</p>
+
+          <h2>7. 허용되는 사용</h2>
+          <p>앱을 오용하거나, 작동을 방해하거나, 버그를 악용하거나, 무단 접근을 시도하거나, 법으로 금지된 리버스 엔지니어링을 하거나, 불법 목적으로 사용하는 것은 금지됩니다.</p>
+
+          <h2>8. 변경 및 제공</h2>
+          <p>우리는 앱의 기능, 게임 밸런스, 보상, 가상 코인 및 콘텐츠를 업데이트, 변경, 중단 또는 종료할 수 있습니다.</p>
+
+          <h2>9. 보증 없음</h2>
+          <p>앱은 “있는 그대로” 및 “사용 가능한 상태”로 제공됩니다. 앱이 항상 중단 없이 오류 없이 작동한다고 보장하지 않습니다.</p>
+
+          <h2>10. 책임 제한</h2>
+          <p>법이 허용하는 최대 범위 내에서, 우리는 앱 사용과 관련된 간접적, 우발적, 특별, 결과적 손해에 대해 책임을 지지 않습니다.</p>
+
+          <h2>11. Apple App Store</h2>
+          <p>Apple App Store에서 앱을 다운로드한 경우, Apple은 앱 또는 그 콘텐츠에 대해 책임지지 않음을 인정합니다.</p>
+
+          <h2>12. 개인정보</h2>
+          <p>앱 사용에는 개인정보 처리방침도 적용됩니다: <a href="https://tonytyap.github.io/rps/privacy.html">https://tonytyap.github.io/rps/privacy.html</a></p>
+
+          <h2>13. 연락처</h2>
+          <p>문의: <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+        `
+      },
+
+      pt: {
+        badge: "Termos de Uso / EULA",
+        title: "Termos de Uso",
+        subtitle: "Leia estes termos antes de usar Pedra Papel Tesoura Duelo IA.",
+        html: `
+          <p><strong>Data de vigência:</strong> 2 de junho de 2026</p>
+          <h2>1. Acordo</h2>
+          <p>Estes Termos de Uso e Contrato de Licença de Usuário Final (“Termos”) se aplicam ao uso de Pedra Papel Tesoura Duelo IA (“Aplicativo”). Ao baixar, acessar ou usar o Aplicativo, você concorda com estes Termos.</p>
+          <p>Se você não concordar, não use o Aplicativo.</p>
+
+          <h2>2. Finalidade do aplicativo</h2>
+          <p>O Aplicativo é um jogo casual móvel baseado em Pedra Papel Tesoura. Ele pode incluir oponentes de IA, moedas virtuais, modos de jogo, recompensas diárias, conquistas, estatísticas e compras opcionais no app.</p>
+
+          <h2>3. Moedas virtuais e recompensas</h2>
+          <div class="notice"><strong>Importante:</strong> moedas, recompensas, pontos, multiplicadores e outros itens do app são itens virtuais apenas para entretenimento. Eles não têm valor no mundo real.</div>
+          <ul>
+            <li>Moedas virtuais não podem ser sacadas.</li>
+            <li>Moedas virtuais não podem ser trocadas por dinheiro, prêmios, cartões-presente, criptomoedas, NFTs, produtos físicos ou qualquer valor real.</li>
+            <li>Moedas virtuais não podem ser transferidas para outra pessoa fora do Aplicativo.</li>
+            <li>O Aplicativo não oferece jogos de azar com dinheiro real, apostas, prêmios em dinheiro ou recompensas reais.</li>
+          </ul>
+
+          <h2>4. Modos de jogo</h2>
+          <p>O Aplicativo pode incluir Classic Mode, Coin Battle, Double Mode, conquistas, recompensas diárias e outros recursos em estilo arcade. Esses recursos são apenas para entretenimento.</p>
+
+          <h2>5. Compras no app</h2>
+          <p>O Aplicativo pode oferecer pacotes opcionais de moedas virtuais, recursos com recompensa ou itens não consumíveis como Remover Anúncios. As compras são processadas pela Apple por meio da App Store.</p>
+          <p>Todas as compras estão sujeitas aos termos de pagamento, regras de reembolso e políticas da Apple App Store.</p>
+
+          <h2>6. Anúncios e recompensas</h2>
+          <p>O Aplicativo pode incluir anúncios, incluindo anúncios recompensados. Eles podem fornecer moedas virtuais ou outros itens virtuais apenas para uso dentro do app.</p>
+
+          <h2>7. Uso aceitável</h2>
+          <p>Você concorda em não usar o Aplicativo de forma indevida, não interferir em seu funcionamento, não explorar bugs, não tentar acesso não autorizado e não usar o Aplicativo para fins ilegais.</p>
+
+          <h2>8. Disponibilidade e alterações</h2>
+          <p>Podemos atualizar, modificar, suspender ou encerrar partes do Aplicativo. Também podemos ajustar equilíbrio, recompensas, moedas virtuais, recursos e conteúdo.</p>
+
+          <h2>9. Sem garantia</h2>
+          <p>O Aplicativo é fornecido “como está” e “conforme disponível”. Não garantimos que ele será ininterrupto, sem erros ou sempre disponível.</p>
+
+          <h2>10. Limitação de responsabilidade</h2>
+          <p>Na extensão máxima permitida por lei, não somos responsáveis por danos indiretos, incidentais, especiais ou consequenciais decorrentes do uso do Aplicativo.</p>
+
+          <h2>11. Apple App Store</h2>
+          <p>Se você baixou o Aplicativo pela Apple App Store, reconhece que a Apple não é responsável pelo Aplicativo ou seu conteúdo.</p>
+
+          <h2>12. Privacidade</h2>
+          <p>O uso do Aplicativo também é regido pela nossa Política de Privacidade: <a href="https://tonytyap.github.io/rps/privacy.html">https://tonytyap.github.io/rps/privacy.html</a></p>
+
+          <h2>13. Contato</h2>
+          <p>Dúvidas: <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+        `
+      },
+
+      es: {
+        badge: "Términos de uso / EULA",
+        title: "Términos de uso",
+        subtitle: "Lee estos términos antes de usar Piedra Papel Tijera Duelo IA.",
+        html: `
+          <p><strong>Fecha de entrada en vigor:</strong> 2 de junio de 2026</p>
+          <h2>1. Acuerdo</h2>
+          <p>Estos Términos de uso y Acuerdo de licencia de usuario final (“Términos”) se aplican al uso de Piedra Papel Tijera Duelo IA (“Aplicación”). Al descargar, acceder o usar la Aplicación, aceptas estos Términos.</p>
+          <p>Si no estás de acuerdo, no uses la Aplicación.</p>
+
+          <h2>2. Finalidad de la aplicación</h2>
+          <p>La Aplicación es un juego casual móvil basado en Piedra Papel Tijera. Puede incluir oponentes de IA, monedas virtuales, modos de juego, recompensas diarias, logros, estadísticas y compras opcionales dentro de la app.</p>
+
+          <h2>3. Monedas virtuales y recompensas</h2>
+          <div class="notice"><strong>Importante:</strong> las monedas, recompensas, puntos, multiplicadores y otros elementos de la app son objetos virtuales solo para entretenimiento. No tienen valor real.</div>
+          <ul>
+            <li>Las monedas virtuales no se pueden retirar.</li>
+            <li>No se pueden cambiar por dinero, premios, tarjetas regalo, criptomonedas, NFT, productos físicos ni ningún valor real.</li>
+            <li>No se pueden transferir a otra persona fuera de la Aplicación.</li>
+            <li>La Aplicación no ofrece juego con dinero real, apuestas, premios en efectivo ni recompensas reales.</li>
+          </ul>
+
+          <h2>4. Modos de juego</h2>
+          <p>La Aplicación puede incluir Classic Mode, Coin Battle, Double Mode, logros, recompensas diarias y otras funciones de estilo arcade. Estas funciones son solo para entretenimiento.</p>
+
+          <h2>5. Compras dentro de la app</h2>
+          <p>La Aplicación puede ofrecer paquetes opcionales de monedas virtuales, funciones con recompensa o artículos no consumibles como Eliminar anuncios. Las compras son procesadas por Apple a través de App Store.</p>
+          <p>Todas las compras están sujetas a los términos de pago, reglas de reembolso y políticas de Apple App Store.</p>
+
+          <h2>6. Anuncios y recompensas</h2>
+          <p>La Aplicación puede incluir anuncios, incluidos anuncios con recompensa. Estos pueden otorgar monedas virtuales u otros objetos virtuales solo para uso dentro de la app.</p>
+
+          <h2>7. Uso aceptable</h2>
+          <p>Aceptas no usar indebidamente la Aplicación, no interferir con su funcionamiento, no explotar errores, no intentar acceso no autorizado y no usarla con fines ilegales.</p>
+
+          <h2>8. Disponibilidad y cambios</h2>
+          <p>Podemos actualizar, modificar, suspender o descontinuar partes de la Aplicación. También podemos ajustar el equilibrio del juego, recompensas, monedas virtuales, funciones y contenido.</p>
+
+          <h2>9. Sin garantía</h2>
+          <p>La Aplicación se proporciona “tal cual” y “según disponibilidad”. No garantizamos que funcione sin interrupciones, errores o disponibilidad permanente.</p>
+
+          <h2>10. Limitación de responsabilidad</h2>
+          <p>En la máxima medida permitida por la ley, no somos responsables de daños indirectos, incidentales, especiales o consecuentes derivados del uso de la Aplicación.</p>
+
+          <h2>11. Apple App Store</h2>
+          <p>Si descargaste la Aplicación desde Apple App Store, reconoces que Apple no es responsable de la Aplicación ni de su contenido.</p>
+
+          <h2>12. Privacidad</h2>
+          <p>El uso de la Aplicación también se rige por nuestra Política de privacidad: <a href="https://tonytyap.github.io/rps/privacy.html">https://tonytyap.github.io/rps/privacy.html</a></p>
+
+          <h2>13. Contacto</h2>
+          <p>Preguntas: <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+        `
+      },
+
+      fr: {
+        badge: "Conditions d’utilisation / EULA",
+        title: "Conditions d’utilisation",
+        subtitle: "Veuillez lire ces conditions avant d’utiliser Pierre Feuille Ciseaux Duel IA.",
+        html: `
+          <p><strong>Date d’entrée en vigueur:</strong> 2 juin 2026</p>
+          <h2>1. Accord</h2>
+          <p>Ces Conditions d’utilisation et Contrat de licence utilisateur final (“Conditions”) s’appliquent à l’utilisation de Pierre Feuille Ciseaux Duel IA (“Application”). En téléchargeant, accédant ou utilisant l’Application, vous acceptez ces Conditions.</p>
+          <p>Si vous n’acceptez pas ces Conditions, veuillez ne pas utiliser l’Application.</p>
+
+          <h2>2. Objet de l’application</h2>
+          <p>L’Application est un jeu mobile casual basé sur Pierre Feuille Ciseaux. Elle peut inclure des adversaires IA, des pièces virtuelles, des modes de jeu, des récompenses quotidiennes, des succès, des statistiques et des achats intégrés facultatifs.</p>
+
+          <h2>3. Pièces virtuelles et récompenses</h2>
+          <div class="notice"><strong>Important:</strong> les pièces, récompenses, points, multiplicateurs et autres objets intégrés sont des objets virtuels de divertissement uniquement. Ils n’ont aucune valeur réelle.</div>
+          <ul>
+            <li>Les pièces virtuelles ne peuvent pas être retirées.</li>
+            <li>Elles ne peuvent pas être échangées contre de l’argent, des prix, cartes cadeaux, crypto, NFT, biens physiques ou toute valeur réelle.</li>
+            <li>Elles ne peuvent pas être transférées à une autre personne en dehors de l’Application.</li>
+            <li>L’Application ne propose pas de jeu d’argent réel, de paris, de prix en espèces ou de récompenses réelles.</li>
+          </ul>
+
+          <h2>4. Modes de jeu</h2>
+          <p>L’Application peut inclure Classic Mode, Coin Battle, Double Mode, succès, récompenses quotidiennes et autres fonctionnalités arcade. Ces fonctionnalités sont destinées uniquement au divertissement.</p>
+
+          <h2>5. Achats intégrés</h2>
+          <p>L’Application peut proposer des packs facultatifs de pièces virtuelles, des fonctionnalités récompensées ou des éléments non consommables comme Supprimer les publicités. Les achats sont traités par Apple via l’App Store.</p>
+          <p>Tous les achats sont soumis aux conditions de paiement, règles de remboursement et politiques de l’Apple App Store.</p>
+
+          <h2>6. Publicités et récompenses</h2>
+          <p>L’Application peut inclure des publicités, y compris des publicités récompensées. Elles peuvent fournir des pièces virtuelles ou d’autres objets virtuels uniquement utilisables dans l’application.</p>
+
+          <h2>7. Utilisation acceptable</h2>
+          <p>Vous acceptez de ne pas abuser de l’Application, interférer avec son fonctionnement, exploiter des bugs, tenter un accès non autorisé ou l’utiliser à des fins illégales.</p>
+
+          <h2>8. Disponibilité et modifications</h2>
+          <p>Nous pouvons mettre à jour, modifier, suspendre ou interrompre certaines parties de l’Application. Nous pouvons également ajuster l’équilibrage, les récompenses, les pièces virtuelles, les fonctionnalités et le contenu.</p>
+
+          <h2>9. Absence de garantie</h2>
+          <p>L’Application est fournie “telle quelle” et “selon disponibilité”. Nous ne garantissons pas un fonctionnement continu, sans erreur ou disponible à tout moment.</p>
+
+          <h2>10. Limitation de responsabilité</h2>
+          <p>Dans la mesure maximale permise par la loi, nous ne sommes pas responsables des dommages indirects, accessoires, spéciaux ou consécutifs liés à l’utilisation de l’Application.</p>
+
+          <h2>11. Apple App Store</h2>
+          <p>Si vous avez téléchargé l’Application depuis l’Apple App Store, vous reconnaissez qu’Apple n’est pas responsable de l’Application ou de son contenu.</p>
+
+          <h2>12. Confidentialité</h2>
+          <p>L’utilisation de l’Application est également régie par notre Politique de confidentialité: <a href="https://tonytyap.github.io/rps/privacy.html">https://tonytyap.github.io/rps/privacy.html</a></p>
+
+          <h2>13. Contact</h2>
+          <p>Questions: <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+        `
+      },
+
+      de: {
+        badge: "Nutzungsbedingungen / EULA",
+        title: "Nutzungsbedingungen",
+        subtitle: "Bitte lesen Sie diese Bedingungen, bevor Sie Schere Stein Papier KI Duell verwenden.",
+        html: `
+          <p><strong>Gültig ab:</strong> 2. Juni 2026</p>
+          <h2>1. Vereinbarung</h2>
+          <p>Diese Nutzungsbedingungen und Endbenutzer-Lizenzvereinbarung (“Bedingungen”) gelten für die Nutzung von Schere Stein Papier KI Duell (“App”). Durch Herunterladen, Zugriff oder Nutzung der App stimmen Sie diesen Bedingungen zu.</p>
+          <p>Wenn Sie nicht einverstanden sind, nutzen Sie die App bitte nicht.</p>
+
+          <h2>2. Zweck der App</h2>
+          <p>Die App ist ein Casual-Mobile-Game basierend auf Schere Stein Papier. Sie kann KI-Gegner, virtuelle Münzen, Spielmodi, tägliche Belohnungen, Erfolge, Statistiken und optionale In-App-Käufe enthalten.</p>
+
+          <h2>3. Virtuelle Münzen und Belohnungen</h2>
+          <div class="notice"><strong>Wichtig:</strong> Münzen, Belohnungen, Punkte, Multiplikatoren und andere In-App-Items sind ausschließlich virtuelle Unterhaltungsgegenstände. Sie haben keinen realen Wert.</div>
+          <ul>
+            <li>Virtuelle Münzen können nicht ausgezahlt werden.</li>
+            <li>Sie können nicht gegen Geld, Preise, Geschenkkarten, Kryptowährungen, NFTs, physische Waren oder reale Werte eingetauscht werden.</li>
+            <li>Sie können außerhalb der App nicht an andere Personen übertragen werden.</li>
+            <li>Die App bietet kein Glücksspiel mit echtem Geld, keine Wetten, Bargeldpreise oder realen Belohnungen.</li>
+          </ul>
+
+          <h2>4. Spielmodi</h2>
+          <p>Die App kann Classic Mode, Coin Battle, Double Mode, Erfolge, tägliche Belohnungen und andere Arcade-Funktionen enthalten. Diese Funktionen dienen nur der Unterhaltung.</p>
+
+          <h2>5. In-App-Käufe</h2>
+          <p>Die App kann optionale Pakete virtueller Münzen, Belohnungsfunktionen oder nicht verbrauchbare Artikel wie Werbung entfernen anbieten. Käufe werden von Apple über den App Store verarbeitet.</p>
+          <p>Alle Käufe unterliegen den Zahlungsbedingungen, Rückerstattungsregeln und Richtlinien des Apple App Store.</p>
+
+          <h2>6. Werbung und Belohnungen</h2>
+          <p>Die App kann Werbung enthalten, einschließlich belohnter Werbung. Diese kann virtuelle Münzen oder andere virtuelle In-App-Items bereitstellen.</p>
+
+          <h2>7. Zulässige Nutzung</h2>
+          <p>Sie verpflichten sich, die App nicht zu missbrauchen, ihren Betrieb nicht zu stören, keine Fehler auszunutzen, keinen unbefugten Zugriff zu versuchen und sie nicht für rechtswidrige Zwecke zu verwenden.</p>
+
+          <h2>8. Verfügbarkeit und Änderungen</h2>
+          <p>Wir können Teile der App aktualisieren, ändern, aussetzen oder einstellen. Außerdem können wir Spielbalance, Belohnungen, virtuelle Münzen, Funktionen und Inhalte anpassen.</p>
+
+          <h2>9. Keine Gewährleistung</h2>
+          <p>Die App wird “wie besehen” und “wie verfügbar” bereitgestellt. Wir garantieren keinen unterbrechungsfreien, fehlerfreien oder jederzeit verfügbaren Betrieb.</p>
+
+          <h2>10. Haftungsbeschränkung</h2>
+          <p>Soweit gesetzlich zulässig, haften wir nicht für indirekte, zufällige, besondere oder Folgeschäden aus der Nutzung der App.</p>
+
+          <h2>11. Apple App Store</h2>
+          <p>Wenn Sie die App aus dem Apple App Store heruntergeladen haben, erkennen Sie an, dass Apple nicht für die App oder deren Inhalt verantwortlich ist.</p>
+
+          <h2>12. Datenschutz</h2>
+          <p>Die Nutzung der App unterliegt auch unserer Datenschutzrichtlinie: <a href="https://tonytyap.github.io/rps/privacy.html">https://tonytyap.github.io/rps/privacy.html</a></p>
+
+          <h2>13. Kontakt</h2>
+          <p>Fragen: <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+        `
+      },
+
+      it: {
+        badge: "Termini di utilizzo / EULA",
+        title: "Termini di utilizzo",
+        subtitle: "Leggi questi termini prima di usare Sasso Carta Forbici Duello IA.",
+        html: `
+          <p><strong>Data di entrata in vigore:</strong> 2 giugno 2026</p>
+          <h2>1. Accordo</h2>
+          <p>Questi Termini di utilizzo e Contratto di licenza con l’utente finale (“Termini”) si applicano all’uso di Sasso Carta Forbici Duello IA (“App”). Scaricando, accedendo o usando l’App, accetti questi Termini.</p>
+          <p>Se non accetti, non usare l’App.</p>
+
+          <h2>2. Scopo dell’app</h2>
+          <p>L’App è un gioco mobile casual basato su Sasso Carta Forbici. Può includere avversari IA, monete virtuali, modalità di gioco, ricompense giornaliere, obiettivi, statistiche e acquisti in-app opzionali.</p>
+
+          <h2>3. Monete virtuali e ricompense</h2>
+          <div class="notice"><strong>Importante:</strong> monete, ricompense, punti, moltiplicatori e altri oggetti in-app sono solo oggetti virtuali di intrattenimento. Non hanno valore reale.</div>
+          <ul>
+            <li>Le monete virtuali non possono essere prelevate.</li>
+            <li>Non possono essere scambiate con denaro, premi, buoni regalo, criptovalute, NFT, beni fisici o qualsiasi valore reale.</li>
+            <li>Non possono essere trasferite ad altre persone fuori dall’App.</li>
+            <li>L’App non offre gioco con denaro reale, scommesse, premi in denaro o ricompense reali.</li>
+          </ul>
+
+          <h2>4. Modalità di gioco</h2>
+          <p>L’App può includere Classic Mode, Coin Battle, Double Mode, obiettivi, ricompense giornaliere e altre funzioni in stile arcade. Sono destinate solo all’intrattenimento.</p>
+
+          <h2>5. Acquisti in-app</h2>
+          <p>L’App può offrire pacchetti opzionali di monete virtuali, funzioni con ricompensa o elementi non consumabili come Rimuovi annunci. Gli acquisti sono elaborati da Apple tramite App Store.</p>
+          <p>Tutti gli acquisti sono soggetti ai termini di pagamento, alle regole di rimborso e alle politiche di Apple App Store.</p>
+
+          <h2>6. Annunci e ricompense</h2>
+          <p>L’App può includere annunci, inclusi annunci con ricompensa. Possono fornire monete virtuali o altri oggetti virtuali solo per l’uso nell’app.</p>
+
+          <h2>7. Uso accettabile</h2>
+          <p>Accetti di non usare l’App in modo improprio, non interferire con il funzionamento, non sfruttare bug, non tentare accessi non autorizzati e non usarla per scopi illegali.</p>
+
+          <h2>8. Disponibilità e modifiche</h2>
+          <p>Possiamo aggiornare, modificare, sospendere o interrompere parti dell’App. Possiamo anche modificare bilanciamento, ricompense, monete virtuali, funzioni e contenuti.</p>
+
+          <h2>9. Nessuna garanzia</h2>
+          <p>L’App è fornita “così com’è” e “secondo disponibilità”. Non garantiamo che funzioni senza interruzioni, errori o disponibilità costante.</p>
+
+          <h2>10. Limitazione di responsabilità</h2>
+          <p>Nella misura massima consentita dalla legge, non siamo responsabili per danni indiretti, incidentali, speciali o consequenziali derivanti dall’uso dell’App.</p>
+
+          <h2>11. Apple App Store</h2>
+          <p>Se hai scaricato l’App da Apple App Store, riconosci che Apple non è responsabile dell’App o del suo contenuto.</p>
+
+          <h2>12. Privacy</h2>
+          <p>L’uso dell’App è regolato anche dalla nostra Informativa sulla privacy: <a href="https://tonytyap.github.io/rps/privacy.html">https://tonytyap.github.io/rps/privacy.html</a></p>
+
+          <h2>13. Contatto</h2>
+          <p>Domande: <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+        `
+      },
+
+      nl: {
+        badge: "Gebruiksvoorwaarden / EULA",
+        title: "Gebruiksvoorwaarden",
+        subtitle: "Lees deze voorwaarden voordat je Steen Papier Schaar AI Duel gebruikt.",
+        html: `
+          <p><strong>Ingangsdatum:</strong> 2 juni 2026</p>
+          <h2>1. Overeenkomst</h2>
+          <p>Deze Gebruiksvoorwaarden en Eindgebruikerslicentieovereenkomst (“Voorwaarden”) zijn van toepassing op het gebruik van Steen Papier Schaar AI Duel (“App”). Door de App te downloaden, openen of gebruiken, ga je akkoord met deze Voorwaarden.</p>
+          <p>Als je niet akkoord gaat, gebruik de App dan niet.</p>
+
+          <h2>2. Doel van de app</h2>
+          <p>De App is een casual mobiele game gebaseerd op Steen Papier Schaar. De App kan AI-tegenstanders, virtuele munten, spelmodi, dagelijkse beloningen, prestaties, statistieken en optionele in-app aankopen bevatten.</p>
+
+          <h2>3. Virtuele munten en beloningen</h2>
+          <div class="notice"><strong>Belangrijk:</strong> munten, beloningen, punten, multipliers en andere in-app items zijn alleen virtuele entertainmentitems. Ze hebben geen echte waarde.</div>
+          <ul>
+            <li>Virtuele munten kunnen niet worden opgenomen.</li>
+            <li>Ze kunnen niet worden ingewisseld voor geld, prijzen, cadeaubonnen, crypto, NFT’s, fysieke goederen of enige echte waarde.</li>
+            <li>Ze kunnen buiten de App niet aan een andere persoon worden overgedragen.</li>
+            <li>De App biedt geen gokken met echt geld, weddenschappen, geldprijzen of echte beloningen.</li>
+          </ul>
+
+          <h2>4. Spelmodi</h2>
+          <p>De App kan Classic Mode, Coin Battle, Double Mode, prestaties, dagelijkse beloningen en andere arcadefuncties bevatten. Deze functies zijn uitsluitend bedoeld voor entertainment.</p>
+
+          <h2>5. In-app aankopen</h2>
+          <p>De App kan optionele virtuele muntpakketten, beloningsfuncties of niet-verbruikbare items zoals Advertenties verwijderen aanbieden. Aankopen worden verwerkt door Apple via de App Store.</p>
+          <p>Alle aankopen zijn onderworpen aan de betalingsvoorwaarden, terugbetalingsregels en App Store-beleidsregels van Apple.</p>
+
+          <h2>6. Advertenties en beloningen</h2>
+          <p>De App kan advertenties bevatten, waaronder beloonde advertenties. Deze kunnen virtuele munten of andere virtuele items geven voor gebruik binnen de App.</p>
+
+          <h2>7. Toegestaan gebruik</h2>
+          <p>Je stemt ermee in de App niet te misbruiken, de werking niet te verstoren, bugs niet te exploiteren, geen ongeautoriseerde toegang te proberen en de App niet voor illegale doeleinden te gebruiken.</p>
+
+          <h2>8. Beschikbaarheid en wijzigingen</h2>
+          <p>We kunnen delen van de App bijwerken, wijzigen, opschorten of beëindigen. Ook kunnen we spelbalans, beloningen, virtuele munten, functies en inhoud aanpassen.</p>
+
+          <h2>9. Geen garantie</h2>
+          <p>De App wordt geleverd “zoals deze is” en “zoals beschikbaar”. We garanderen niet dat de App altijd zonder onderbrekingen, fouten of beschikbaar is.</p>
+
+          <h2>10. Beperking van aansprakelijkheid</h2>
+          <p>Voor zover wettelijk toegestaan zijn wij niet aansprakelijk voor indirecte, incidentele, speciale of gevolgschade die voortvloeit uit het gebruik van de App.</p>
+
+          <h2>11. Apple App Store</h2>
+          <p>Als je de App via de Apple App Store hebt gedownload, erken je dat Apple niet verantwoordelijk is voor de App of de inhoud ervan.</p>
+
+          <h2>12. Privacy</h2>
+          <p>Het gebruik van de App valt ook onder ons Privacybeleid: <a href="https://tonytyap.github.io/rps/privacy.html">https://tonytyap.github.io/rps/privacy.html</a></p>
+
+          <h2>13. Contact</h2>
+          <p>Vragen: <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+        `
+      }
+    };
+
+    const select = document.getElementById("langSelect");
+    Object.entries(LANGS).forEach(([code, label]) => {
+      const option = document.createElement("option");
+      option.value = code;
+      option.textContent = label;
+      select.appendChild(option);
+    });
+
+    function getInitialLang() {
+      const saved = localStorage.getItem("rps_lang");
+      if (saved && DATA[saved]) return saved;
+      const browser = (navigator.language || "en").slice(0, 2);
+      return DATA[browser] ? browser : "en";
+    }
+
+    function render(lang) {
+      const data = DATA[lang] || DATA.en;
+      document.documentElement.lang = lang;
+      document.getElementById("badge").textContent = data.badge;
+      document.getElementById("title").textContent = data.title;
+      document.getElementById("subtitle").textContent = data.subtitle;
+      document.getElementById("content").innerHTML = data.html;
+      select.value = lang;
+      localStorage.setItem("rps_lang", lang);
+    }
+
+    select.addEventListener("change", (e) => render(e.target.value));
+    document.getElementById("year").textContent = new Date().getFullYear();
+    render(getInitialLang());
+  </script>
+</body>
+</html>
