@@ -1,1 +1,977 @@
+<!-- privacy.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Rock Paper Scissors AI Duel</title>
+  <meta name="description" content="Privacy Policy for Rock Paper Scissors AI Duel." />
+  <style>
+    :root {
+      --bg1: #eef7ff;
+      --bg2: #f8f0ff;
+      --bg3: #fff8e8;
+      --card: rgba(255, 255, 255, 0.78);
+      --text: #1f2440;
+      --muted: #68708f;
+      --line: rgba(90, 105, 160, 0.18);
+      --blue: #5bbcff;
+      --purple: #9b7bff;
+      --pink: #ff8bd4;
+      --gold: #ffc94a;
+      --shadow: 0 24px 70px rgba(73, 88, 160, 0.18);
+    }
 
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 16% 12%, rgba(91, 188, 255, 0.36), transparent 28%),
+        radial-gradient(circle at 82% 8%, rgba(255, 139, 212, 0.30), transparent 28%),
+        radial-gradient(circle at 55% 92%, rgba(255, 201, 74, 0.28), transparent 34%),
+        linear-gradient(135deg, var(--bg1), var(--bg2) 55%, var(--bg3));
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .cloud {
+      position: fixed;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.55);
+      filter: blur(1px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .cloud.c1 { width: 220px; height: 68px; top: 88px; left: -60px; }
+    .cloud.c2 { width: 300px; height: 86px; top: 210px; right: -110px; }
+    .cloud.c3 { width: 180px; height: 58px; bottom: 90px; left: 8%; opacity: .55; }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: min(1040px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 44px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: white;
+      background: linear-gradient(135deg, var(--blue), var(--purple), var(--pink));
+      box-shadow: 0 12px 30px rgba(123, 112, 255, .28);
+    }
+
+    .brand-title {
+      font-weight: 850;
+      font-size: 18px;
+      line-height: 1.05;
+    }
+
+    .brand-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    select, .nav a {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 13px;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(73, 88, 160, 0.08);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hero {
+      border: 1px solid var(--line);
+      background: var(--card);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      padding: clamp(24px, 4vw, 46px);
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero:after {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      right: -70px;
+      top: -70px;
+      background: radial-gradient(circle, rgba(255,201,74,.42), transparent 67%);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(91,188,255,.45);
+      background: rgba(232, 247, 255, .75);
+      color: #2370a7;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-weight: 800;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(32px, 5vw, 58px);
+      letter-spacing: -2px;
+      line-height: .96;
+    }
+
+    .lead {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.55;
+      max-width: 760px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.70);
+      backdrop-filter: blur(20px);
+      border-radius: 26px;
+      box-shadow: 0 18px 50px rgba(73, 88, 160, 0.12);
+      padding: clamp(20px, 3vw, 32px);
+      margin: 16px 0;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 25px;
+      letter-spacing: -.5px;
+    }
+
+    h3 {
+      margin: 22px 0 8px;
+      font-size: 18px;
+    }
+
+    p, li {
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 15.8px;
+    }
+
+    ul { padding-left: 20px; }
+
+    a { color: #5a56d6; font-weight: 750; }
+
+    .notice {
+      border-left: 5px solid var(--blue);
+      background: rgba(232, 247, 255, .72);
+      padding: 14px 16px;
+      border-radius: 16px;
+      color: #235b78;
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    footer {
+      color: var(--muted);
+      text-align: center;
+      padding: 22px 0 8px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      header { align-items: flex-start; flex-direction: column; }
+      .controls { justify-content: flex-start; width: 100%; }
+      select { width: 100%; }
+      .nav a { flex: 1; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+
+  <main class="shell">
+    <header>
+      <a class="brand" href="https://tonytyap.github.io/rps/support.html">
+        <div class="logo">RPS</div>
+        <div>
+          <div class="brand-title">Rock Paper Scissors AI Duel</div>
+          <div class="brand-subtitle">Premium Soft Arcade Game</div>
+        </div>
+      </a>
+
+      <div class="controls">
+        <select id="langSelect" aria-label="Select language"></select>
+        <nav class="nav">
+          <a href="https://tonytyap.github.io/rps/terms.html">Terms</a>
+          <a href="https://tonytyap.github.io/rps/privacy.html">Privacy</a>
+          <a href="https://tonytyap.github.io/rps/support.html">Support</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="badge" id="badge"></div>
+      <h1 id="title"></h1>
+      <p class="lead" id="subtitle"></p>
+    </section>
+
+    <section class="card" id="content"></section>
+
+    <footer>
+      © <span id="year"></span> Rock Paper Scissors AI Duel. All rights reserved.
+      <br />
+      Contact: <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a>
+    </footer>
+  </main>
+
+  <script>
+    const LANGS = {
+      en: "English",
+      ru: "Русский",
+      ja: "日本語",
+      zh: "简体中文",
+      ko: "한국어",
+      pt: "Português",
+      es: "Español",
+      fr: "Français",
+      de: "Deutsch",
+      it: "Italiano",
+      nl: "Nederlands"
+    };
+
+    const DATA = {
+      en: {
+        badge: "Privacy Policy",
+        title: "Privacy Policy",
+        subtitle: "This page explains how Rock Paper Scissors AI Duel handles information.",
+        html: `
+          <p><strong>Effective date:</strong> June 2, 2026</p>
+
+          <h2>1. Overview</h2>
+          <p>Rock Paper Scissors AI Duel is a casual mobile game. We respect your privacy and aim to collect only the information needed to operate, improve, and support the App.</p>
+
+          <h2>2. Information We May Collect</h2>
+          <p>The App may process the following types of information:</p>
+          <ul>
+            <li>Gameplay data such as score, virtual coin balance, achievements, missions, statistics, settings, and progress.</li>
+            <li>Device and technical data such as device type, operating system, app version, crash reports, diagnostics, and performance data.</li>
+            <li>Purchase-related information processed by Apple, such as purchase status. We do not receive your full payment card details.</li>
+            <li>Advertising-related data if ads or rewarded ads are enabled, such as ad interactions and basic device identifiers handled by ad partners.</li>
+          </ul>
+
+          <h2>3. How We Use Information</h2>
+          <p>We use information to:</p>
+          <ul>
+            <li>Run the App and save your progress.</li>
+            <li>Provide virtual coins, rewards, achievements, and game statistics.</li>
+            <li>Process or verify in-app purchases through Apple.</li>
+            <li>Show ads or rewarded ads, if available in the App.</li>
+            <li>Improve performance, fix bugs, and support users.</li>
+            <li>Comply with legal, safety, and platform requirements.</li>
+          </ul>
+
+          <h2>4. Virtual Coins</h2>
+          <div class="notice">Virtual coins and rewards are entertainment items only. They have no real-world value and cannot be withdrawn, exchanged, transferred, or redeemed for money, prizes, gift cards, crypto, NFTs, physical goods, or any real-world value.</div>
+
+          <h2>5. Third-Party Services</h2>
+          <p>The App may use third-party services for app distribution, analytics, crash reporting, purchases, ads, or rewarded ads. These services may process data according to their own privacy policies.</p>
+          <p>Examples may include Apple App Store services, Apple in-app purchase systems, analytics tools, crash reporting tools, and advertising networks if enabled.</p>
+
+          <h2>6. Children’s Privacy</h2>
+          <p>The App is intended for a general audience. We do not knowingly collect personal information from children in a way that requires parental consent under applicable law. If you believe a child has provided personal information, please contact us.</p>
+
+          <h2>7. Data Retention</h2>
+          <p>We retain information only as long as needed for the purposes described in this policy, including app operation, support, legal compliance, and security.</p>
+
+          <h2>8. Data Security</h2>
+          <p>We use reasonable measures to protect information. However, no method of electronic storage or transmission is completely secure.</p>
+
+          <h2>9. Your Choices</h2>
+          <p>You can manage app permissions in your device settings. You can also contact us to ask questions about privacy or request help related to your data, where applicable.</p>
+
+          <h2>10. International Users</h2>
+          <p>Your information may be processed in countries other than your own, depending on the services used to operate the App.</p>
+
+          <h2>11. Changes to This Policy</h2>
+          <p>We may update this Privacy Policy from time to time. The updated version will be posted on this page with a new effective date.</p>
+
+          <h2>12. Terms of Use / EULA</h2>
+          <p>Terms of Use / EULA: <a href="https://tonytyap.github.io/rps/terms.html">https://tonytyap.github.io/rps/terms.html</a></p>
+
+          <h2>13. Contact</h2>
+          <p>If you have questions about this Privacy Policy, contact us at <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a>.</p>
+        `
+      },
+
+      ru: {
+        badge: "Политика конфиденциальности",
+        title: "Политика конфиденциальности",
+        subtitle: "Эта страница объясняет, как Камень Ножницы Бумага AI Дуэль обрабатывает информацию.",
+        html: `
+          <p><strong>Дата вступления в силу:</strong> 2 июня 2026 г.</p>
+          <h2>1. Обзор</h2>
+          <p>Камень Ножницы Бумага AI Дуэль — казуальная мобильная игра. Мы уважаем вашу конфиденциальность и стремимся обрабатывать только информацию, необходимую для работы, улучшения и поддержки Приложения.</p>
+
+          <h2>2. Информация, которую мы можем обрабатывать</h2>
+          <ul>
+            <li>Игровые данные: счёт, баланс виртуальных монет, достижения, миссии, статистика, настройки и прогресс.</li>
+            <li>Технические данные: тип устройства, операционная система, версия приложения, отчёты о сбоях, диагностика и производительность.</li>
+            <li>Информация о покупках, обрабатываемая Apple, например статус покупки. Мы не получаем полные данные вашей платёжной карты.</li>
+            <li>Рекламные данные, если включена реклама или rewarded ads: взаимодействия с рекламой и базовые идентификаторы устройства, обрабатываемые рекламными партнёрами.</li>
+          </ul>
+
+          <h2>3. Как мы используем информацию</h2>
+          <ul>
+            <li>Для работы Приложения и сохранения прогресса.</li>
+            <li>Для виртуальных монет, наград, достижений и статистики.</li>
+            <li>Для проверки покупок через Apple.</li>
+            <li>Для показа рекламы или rewarded ads, если они доступны.</li>
+            <li>Для исправления ошибок, улучшения производительности и поддержки пользователей.</li>
+            <li>Для соблюдения юридических, безопасностных и платформенных требований.</li>
+          </ul>
+
+          <h2>4. Виртуальные монеты</h2>
+          <div class="notice">Виртуальные монеты и награды являются только развлекательными предметами. Они не имеют реальной ценности и не могут быть выведены, обменяны, переданы или использованы для получения денег, призов, подарочных карт, криптовалюты, NFT, физических товаров или любой реальной ценности.</div>
+
+          <h2>5. Сторонние сервисы</h2>
+          <p>Приложение может использовать сторонние сервисы для распространения приложения, аналитики, отчётов о сбоях, покупок, рекламы или rewarded ads. Эти сервисы могут обрабатывать данные согласно собственным политикам конфиденциальности.</p>
+
+          <h2>6. Конфиденциальность детей</h2>
+          <p>Приложение предназначено для широкой аудитории. Мы сознательно не собираем персональную информацию детей способом, требующим согласия родителей по применимому законодательству.</p>
+
+          <h2>7. Хранение данных</h2>
+          <p>Мы храним информацию только столько, сколько необходимо для целей, описанных в этой Политике.</p>
+
+          <h2>8. Безопасность данных</h2>
+          <p>Мы используем разумные меры защиты информации, но ни один способ хранения или передачи данных не является полностью безопасным.</p>
+
+          <h2>9. Ваш выбор</h2>
+          <p>Вы можете управлять разрешениями приложения в настройках устройства. Также вы можете связаться с нами по вопросам конфиденциальности.</p>
+
+          <h2>10. Международные пользователи</h2>
+          <p>Ваша информация может обрабатываться в странах, отличных от вашей, в зависимости от используемых сервисов.</p>
+
+          <h2>11. Изменения</h2>
+          <p>Мы можем обновлять эту Политику конфиденциальности. Обновлённая версия будет опубликована на этой странице.</p>
+
+          <h2>12. Условия использования / EULA</h2>
+          <p><a href="https://tonytyap.github.io/rps/terms.html">https://tonytyap.github.io/rps/terms.html</a></p>
+
+          <h2>13. Контакты</h2>
+          <p>Вопросы можно отправить на <a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a>.</p>
+        `
+      },
+
+      ja: {
+        badge: "プライバシーポリシー",
+        title: "プライバシーポリシー",
+        subtitle: "じゃんけんAIデュエルにおける情報の取り扱いについて説明します。",
+        html: `
+          <p><strong>発効日:</strong> 2026年6月2日</p>
+          <h2>1. 概要</h2>
+          <p>じゃんけんAIデュエルはカジュアルモバイルゲームです。当社はプライバシーを尊重し、アプリの運営、改善、サポートに必要な情報のみを取り扱うよう努めます。</p>
+
+          <h2>2. 取り扱う可能性のある情報</h2>
+          <ul>
+            <li>スコア、バーチャルコイン残高、実績、ミッション、統計、設定、進行状況などのゲームデータ。</li>
+            <li>デバイス種別、OS、アプリバージョン、クラッシュレポート、診断、パフォーマンスなどの技術データ。</li>
+            <li>Appleにより処理される購入関連情報。完全なカード情報は受け取りません。</li>
+            <li>広告またはリワード広告が有効な場合、広告の利用状況や広告パートナーが処理する基本的な識別子。</li>
+          </ul>
+
+          <h2>3. 情報の利用目的</h2>
+          <ul>
+            <li>アプリの運営と進行状況の保存。</li>
+            <li>バーチャルコイン、報酬、実績、統計の提供。</li>
+            <li>Appleを通じたアプリ内購入の確認。</li>
+            <li>広告またはリワード広告の表示。</li>
+            <li>不具合修正、性能改善、ユーザーサポート。</li>
+            <li>法令、安全性、プラットフォーム要件への対応。</li>
+          </ul>
+
+          <h2>4. バーチャルコイン</h2>
+          <div class="notice">バーチャルコインと報酬は娯楽用の仮想アイテムです。現実世界での価値はなく、現金、賞品、ギフトカード、暗号資産、NFT、物理的商品、その他の現実価値と交換、引き出し、譲渡、換金することはできません。</div>
+
+          <h2>5. 第三者サービス</h2>
+          <p>本アプリは、配信、分析、クラッシュ報告、購入、広告、リワード広告のために第三者サービスを使用する場合があります。これらのサービスは独自のプライバシーポリシーに従ってデータを処理する場合があります。</p>
+
+          <h2>6. 子どものプライバシー</h2>
+          <p>本アプリは一般向けです。適用法で保護者の同意が必要となる方法で、子どもから個人情報を意図的に収集することはありません。</p>
+
+          <h2>7. データ保持</h2>
+          <p>情報は、このポリシーに記載された目的に必要な期間のみ保持されます。</p>
+
+          <h2>8. データ保護</h2>
+          <p>合理的な保護措置を講じますが、電子的な保存または送信方法が完全に安全であるとは限りません。</p>
+
+          <h2>9. 選択肢</h2>
+          <p>デバイス設定でアプリの権限を管理できます。プライバシーに関する質問はお問い合わせください。</p>
+
+          <h2>10. 国際ユーザー</h2>
+          <p>使用されるサービスにより、情報が居住国以外で処理される場合があります。</p>
+
+          <h2>11. 変更</h2>
+          <p>本ポリシーは随時更新される場合があります。更新版はこのページに掲載されます。</p>
+
+          <h2>12. 利用規約 / EULA</h2>
+          <p><a href="https://tonytyap.github.io/rps/terms.html">https://tonytyap.github.io/rps/terms.html</a></p>
+
+          <h2>13. お問い合わせ</h2>
+          <p><a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+        `
+      },
+
+      zh: {
+        badge: "隐私政策",
+        title: "隐私政策",
+        subtitle: "本页面说明石头剪刀布AI对决如何处理信息。",
+        html: `
+          <p><strong>生效日期:</strong> 2026年6月2日</p>
+          <h2>1. 概述</h2>
+          <p>石头剪刀布AI对决是一款休闲手机游戏。我们尊重您的隐私，并尽量只处理运行、改进和支持本应用所需的信息。</p>
+
+          <h2>2. 我们可能处理的信息</h2>
+          <ul>
+            <li>游戏数据，如分数、虚拟金币余额、成就、任务、统计、设置和进度。</li>
+            <li>设备和技术数据，如设备类型、操作系统、应用版本、崩溃报告、诊断和性能数据。</li>
+            <li>由 Apple 处理的购买相关信息，例如购买状态。我们不会收到完整的银行卡信息。</li>
+            <li>如果启用广告或激励广告，可能处理广告互动和由广告合作伙伴处理的基本设备标识符。</li>
+          </ul>
+
+          <h2>3. 信息用途</h2>
+          <ul>
+            <li>运行应用并保存进度。</li>
+            <li>提供虚拟金币、奖励、成就和统计。</li>
+            <li>通过 Apple 验证应用内购买。</li>
+            <li>展示广告或激励广告。</li>
+            <li>修复问题、提升性能并提供支持。</li>
+            <li>遵守法律、安全和平台要求。</li>
+          </ul>
+
+          <h2>4. 虚拟金币</h2>
+          <div class="notice">虚拟金币和奖励仅为娱乐用途的虚拟物品，没有现实世界价值，不能提现、兑换、转让，也不能用于兑换现金、奖品、礼品卡、加密货币、NFT、实物商品或任何现实价值。</div>
+
+          <h2>5. 第三方服务</h2>
+          <p>本应用可能使用第三方服务进行应用分发、分析、崩溃报告、购买、广告或激励广告。这些服务可能根据其自己的隐私政策处理数据。</p>
+
+          <h2>6. 儿童隐私</h2>
+          <p>本应用面向普通用户。我们不会在适用法律要求父母同意的情况下，故意收集儿童个人信息。</p>
+
+          <h2>7. 数据保留</h2>
+          <p>我们仅在本政策所述目的所需的期间内保留信息。</p>
+
+          <h2>8. 数据安全</h2>
+          <p>我们采取合理措施保护信息，但任何电子存储或传输方式都无法保证完全安全。</p>
+
+          <h2>9. 您的选择</h2>
+          <p>您可以在设备设置中管理应用权限，也可以联系我们咨询隐私问题。</p>
+
+          <h2>10. 国际用户</h2>
+          <p>根据所使用的服务，您的信息可能在您所在国家/地区以外被处理。</p>
+
+          <h2>11. 政策变更</h2>
+          <p>我们可能不时更新本隐私政策。更新版本将发布在本页面。</p>
+
+          <h2>12. 使用条款 / EULA</h2>
+          <p><a href="https://tonytyap.github.io/rps/terms.html">https://tonytyap.github.io/rps/terms.html</a></p>
+
+          <h2>13. 联系我们</h2>
+          <p><a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+        `
+      },
+
+      ko: {
+        badge: "개인정보 처리방침",
+        title: "개인정보 처리방침",
+        subtitle: "가위바위보 AI 듀얼이 정보를 처리하는 방식을 설명합니다.",
+        html: `
+          <p><strong>시행일:</strong> 2026년 6월 2일</p>
+          <h2>1. 개요</h2>
+          <p>가위바위보 AI 듀얼은 캐주얼 모바일 게임입니다. 우리는 개인정보를 존중하며 앱 운영, 개선 및 지원에 필요한 정보만 처리하기 위해 노력합니다.</p>
+
+          <h2>2. 처리할 수 있는 정보</h2>
+          <ul>
+            <li>점수, 가상 코인 잔액, 업적, 미션, 통계, 설정 및 진행 상황 등 게임 데이터.</li>
+            <li>기기 유형, 운영체제, 앱 버전, 충돌 보고서, 진단 및 성능 데이터.</li>
+            <li>Apple이 처리하는 구매 관련 정보. 전체 결제 카드 정보는 받지 않습니다.</li>
+            <li>광고 또는 보상형 광고가 활성화된 경우 광고 상호작용 및 광고 파트너가 처리하는 기본 기기 식별자.</li>
+          </ul>
+
+          <h2>3. 정보 사용 목적</h2>
+          <ul>
+            <li>앱 운영 및 진행 상황 저장.</li>
+            <li>가상 코인, 보상, 업적 및 통계 제공.</li>
+            <li>Apple을 통한 앱 내 구매 확인.</li>
+            <li>광고 또는 보상형 광고 표시.</li>
+            <li>버그 수정, 성능 개선 및 사용자 지원.</li>
+            <li>법률, 안전 및 플랫폼 요구사항 준수.</li>
+          </ul>
+
+          <h2>4. 가상 코인</h2>
+          <div class="notice">가상 코인과 보상은 오락용 가상 아이템입니다. 현실 세계의 가치가 없으며 현금, 상품, 기프트 카드, 암호화폐, NFT, 실물 상품 또는 현실 가치로 인출, 교환, 양도, 환전할 수 없습니다.</div>
+
+          <h2>5. 제3자 서비스</h2>
+          <p>앱은 배포, 분석, 충돌 보고, 구매, 광고 또는 보상형 광고를 위해 제3자 서비스를 사용할 수 있습니다. 이러한 서비스는 자체 개인정보 처리방침에 따라 데이터를 처리할 수 있습니다.</p>
+
+          <h2>6. 아동 개인정보</h2>
+          <p>앱은 일반 사용자를 대상으로 합니다. 적용 법률상 부모 동의가 필요한 방식으로 아동의 개인정보를 고의로 수집하지 않습니다.</p>
+
+          <h2>7. 데이터 보관</h2>
+          <p>정보는 본 방침에 명시된 목적에 필요한 기간 동안만 보관됩니다.</p>
+
+          <h2>8. 데이터 보안</h2>
+          <p>우리는 합리적인 보호 조치를 사용하지만 전자 저장 또는 전송 방식이 완전히 안전하다고 보장할 수는 없습니다.</p>
+
+          <h2>9. 선택권</h2>
+          <p>기기 설정에서 앱 권한을 관리할 수 있으며, 개인정보 관련 질문은 이메일로 문의할 수 있습니다.</p>
+
+          <h2>10. 국제 사용자</h2>
+          <p>사용되는 서비스에 따라 귀하의 정보가 거주 국가 외부에서 처리될 수 있습니다.</p>
+
+          <h2>11. 변경</h2>
+          <p>본 개인정보 처리방침은 수시로 업데이트될 수 있으며, 업데이트된 버전은 이 페이지에 게시됩니다.</p>
+
+          <h2>12. 이용약관 / EULA</h2>
+          <p><a href="https://tonytyap.github.io/rps/terms.html">https://tonytyap.github.io/rps/terms.html</a></p>
+
+          <h2>13. 연락처</h2>
+          <p><a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+        `
+      },
+
+      pt: {
+        badge: "Política de Privacidade",
+        title: "Política de Privacidade",
+        subtitle: "Esta página explica como Pedra Papel Tesoura Duelo IA lida com informações.",
+        html: `
+          <p><strong>Data de vigência:</strong> 2 de junho de 2026</p>
+          <h2>1. Visão geral</h2>
+          <p>Pedra Papel Tesoura Duelo IA é um jogo casual móvel. Respeitamos sua privacidade e buscamos processar apenas as informações necessárias para operar, melhorar e oferecer suporte ao Aplicativo.</p>
+
+          <h2>2. Informações que podemos processar</h2>
+          <ul>
+            <li>Dados de jogo, como pontuação, saldo de moedas virtuais, conquistas, missões, estatísticas, configurações e progresso.</li>
+            <li>Dados técnicos, como tipo de dispositivo, sistema operacional, versão do app, relatórios de falhas, diagnósticos e desempenho.</li>
+            <li>Informações de compra processadas pela Apple, como status da compra. Não recebemos os dados completos do cartão.</li>
+            <li>Dados relacionados a anúncios, se anúncios ou anúncios recompensados estiverem ativados.</li>
+          </ul>
+
+          <h2>3. Como usamos as informações</h2>
+          <ul>
+            <li>Para operar o Aplicativo e salvar o progresso.</li>
+            <li>Para fornecer moedas virtuais, recompensas, conquistas e estatísticas.</li>
+            <li>Para verificar compras pelo sistema da Apple.</li>
+            <li>Para exibir anúncios ou anúncios recompensados.</li>
+            <li>Para melhorar desempenho, corrigir erros e oferecer suporte.</li>
+            <li>Para cumprir requisitos legais, de segurança e de plataforma.</li>
+          </ul>
+
+          <h2>4. Moedas virtuais</h2>
+          <div class="notice">Moedas virtuais e recompensas são itens de entretenimento. Elas não têm valor real e não podem ser sacadas, trocadas, transferidas ou resgatadas por dinheiro, prêmios, cartões-presente, criptomoedas, NFTs, produtos físicos ou qualquer valor real.</div>
+
+          <h2>5. Serviços de terceiros</h2>
+          <p>O Aplicativo pode usar serviços de terceiros para distribuição, análise, relatórios de falhas, compras, anúncios ou anúncios recompensados. Esses serviços podem processar dados conforme suas próprias políticas de privacidade.</p>
+
+          <h2>6. Privacidade infantil</h2>
+          <p>O Aplicativo é destinado ao público geral. Não coletamos intencionalmente informações pessoais de crianças de forma que exija consentimento dos pais conforme a lei aplicável.</p>
+
+          <h2>7. Retenção de dados</h2>
+          <p>Retemos informações apenas pelo tempo necessário para os fins descritos nesta política.</p>
+
+          <h2>8. Segurança</h2>
+          <p>Usamos medidas razoáveis para proteger informações, mas nenhum método eletrônico é completamente seguro.</p>
+
+          <h2>9. Suas escolhas</h2>
+          <p>Você pode gerenciar permissões nas configurações do dispositivo e entrar em contato conosco sobre questões de privacidade.</p>
+
+          <h2>10. Usuários internacionais</h2>
+          <p>Suas informações podem ser processadas em países diferentes do seu, dependendo dos serviços usados.</p>
+
+          <h2>11. Alterações</h2>
+          <p>Podemos atualizar esta Política de Privacidade. A versão atualizada será publicada nesta página.</p>
+
+          <h2>12. Termos de Uso / EULA</h2>
+          <p><a href="https://tonytyap.github.io/rps/terms.html">https://tonytyap.github.io/rps/terms.html</a></p>
+
+          <h2>13. Contato</h2>
+          <p><a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+        `
+      },
+
+      es: {
+        badge: "Política de privacidad",
+        title: "Política de privacidad",
+        subtitle: "Esta página explica cómo Piedra Papel Tijera Duelo IA maneja la información.",
+        html: `
+          <p><strong>Fecha de entrada en vigor:</strong> 2 de junio de 2026</p>
+          <h2>1. Resumen</h2>
+          <p>Piedra Papel Tijera Duelo IA es un juego casual móvil. Respetamos tu privacidad y buscamos procesar solo la información necesaria para operar, mejorar y dar soporte a la Aplicación.</p>
+
+          <h2>2. Información que podemos procesar</h2>
+          <ul>
+            <li>Datos de juego, como puntuación, saldo de monedas virtuales, logros, misiones, estadísticas, ajustes y progreso.</li>
+            <li>Datos técnicos, como tipo de dispositivo, sistema operativo, versión de la app, informes de fallos, diagnósticos y rendimiento.</li>
+            <li>Información de compras procesada por Apple, como estado de compra. No recibimos los datos completos de tu tarjeta.</li>
+            <li>Datos relacionados con anuncios si se activan anuncios o anuncios con recompensa.</li>
+          </ul>
+
+          <h2>3. Cómo usamos la información</h2>
+          <ul>
+            <li>Para operar la Aplicación y guardar el progreso.</li>
+            <li>Para proporcionar monedas virtuales, recompensas, logros y estadísticas.</li>
+            <li>Para verificar compras mediante Apple.</li>
+            <li>Para mostrar anuncios o anuncios con recompensa.</li>
+            <li>Para mejorar el rendimiento, corregir errores y ofrecer soporte.</li>
+            <li>Para cumplir requisitos legales, de seguridad y de plataforma.</li>
+          </ul>
+
+          <h2>4. Monedas virtuales</h2>
+          <div class="notice">Las monedas virtuales y recompensas son elementos de entretenimiento. No tienen valor real y no pueden retirarse, intercambiarse, transferirse ni canjearse por dinero, premios, tarjetas regalo, criptomonedas, NFT, productos físicos ni ningún valor real.</div>
+
+          <h2>5. Servicios de terceros</h2>
+          <p>La Aplicación puede usar servicios de terceros para distribución, análisis, informes de fallos, compras, anuncios o anuncios con recompensa. Estos servicios pueden procesar datos según sus propias políticas de privacidad.</p>
+
+          <h2>6. Privacidad de menores</h2>
+          <p>La Aplicación está destinada a una audiencia general. No recopilamos conscientemente información personal de menores de una forma que requiera consentimiento parental según la ley aplicable.</p>
+
+          <h2>7. Conservación de datos</h2>
+          <p>Conservamos información solo durante el tiempo necesario para los fines descritos en esta política.</p>
+
+          <h2>8. Seguridad</h2>
+          <p>Usamos medidas razonables para proteger la información, pero ningún método electrónico es completamente seguro.</p>
+
+          <h2>9. Tus opciones</h2>
+          <p>Puedes gestionar permisos en los ajustes del dispositivo y contactarnos por cuestiones de privacidad.</p>
+
+          <h2>10. Usuarios internacionales</h2>
+          <p>Tu información puede procesarse en países distintos al tuyo, dependiendo de los servicios utilizados.</p>
+
+          <h2>11. Cambios</h2>
+          <p>Podemos actualizar esta Política de privacidad. La versión actualizada se publicará en esta página.</p>
+
+          <h2>12. Términos de uso / EULA</h2>
+          <p><a href="https://tonytyap.github.io/rps/terms.html">https://tonytyap.github.io/rps/terms.html</a></p>
+
+          <h2>13. Contacto</h2>
+          <p><a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+        `
+      },
+
+      fr: {
+        badge: "Politique de confidentialité",
+        title: "Politique de confidentialité",
+        subtitle: "Cette page explique comment Pierre Feuille Ciseaux Duel IA traite les informations.",
+        html: `
+          <p><strong>Date d’entrée en vigueur:</strong> 2 juin 2026</p>
+          <h2>1. Aperçu</h2>
+          <p>Pierre Feuille Ciseaux Duel IA est un jeu mobile casual. Nous respectons votre vie privée et cherchons à traiter uniquement les informations nécessaires au fonctionnement, à l’amélioration et au support de l’Application.</p>
+
+          <h2>2. Informations que nous pouvons traiter</h2>
+          <ul>
+            <li>Données de jeu: score, solde de pièces virtuelles, succès, missions, statistiques, paramètres et progression.</li>
+            <li>Données techniques: type d’appareil, système d’exploitation, version de l’app, rapports de crash, diagnostics et performance.</li>
+            <li>Informations d’achat traitées par Apple, comme le statut d’achat. Nous ne recevons pas les données complètes de votre carte.</li>
+            <li>Données liées aux publicités si des publicités ou publicités récompensées sont activées.</li>
+          </ul>
+
+          <h2>3. Utilisation des informations</h2>
+          <ul>
+            <li>Faire fonctionner l’Application et sauvegarder la progression.</li>
+            <li>Fournir des pièces virtuelles, récompenses, succès et statistiques.</li>
+            <li>Vérifier les achats via Apple.</li>
+            <li>Afficher des publicités ou publicités récompensées.</li>
+            <li>Améliorer la performance, corriger les bugs et fournir le support.</li>
+            <li>Respecter les exigences légales, de sécurité et de plateforme.</li>
+          </ul>
+
+          <h2>4. Pièces virtuelles</h2>
+          <div class="notice">Les pièces virtuelles et récompenses sont des éléments de divertissement. Elles n’ont aucune valeur réelle et ne peuvent pas être retirées, échangées, transférées ou converties en argent, prix, cartes cadeaux, crypto, NFT, biens physiques ou toute valeur réelle.</div>
+
+          <h2>5. Services tiers</h2>
+          <p>L’Application peut utiliser des services tiers pour la distribution, l’analyse, les rapports de crash, les achats, les publicités ou les publicités récompensées. Ces services peuvent traiter des données selon leurs propres politiques de confidentialité.</p>
+
+          <h2>6. Confidentialité des enfants</h2>
+          <p>L’Application s’adresse à un public général. Nous ne collectons pas sciemment des informations personnelles d’enfants d’une manière nécessitant le consentement parental selon la loi applicable.</p>
+
+          <h2>7. Conservation</h2>
+          <p>Nous conservons les informations uniquement le temps nécessaire aux finalités décrites dans cette politique.</p>
+
+          <h2>8. Sécurité</h2>
+          <p>Nous utilisons des mesures raisonnables pour protéger les informations, mais aucune méthode électronique n’est totalement sûre.</p>
+
+          <h2>9. Vos choix</h2>
+          <p>Vous pouvez gérer les autorisations dans les paramètres de votre appareil et nous contacter pour toute question de confidentialité.</p>
+
+          <h2>10. Utilisateurs internationaux</h2>
+          <p>Vos informations peuvent être traitées dans des pays autres que le vôtre selon les services utilisés.</p>
+
+          <h2>11. Modifications</h2>
+          <p>Nous pouvons mettre à jour cette Politique de confidentialité. La version mise à jour sera publiée sur cette page.</p>
+
+          <h2>12. Conditions d’utilisation / EULA</h2>
+          <p><a href="https://tonytyap.github.io/rps/terms.html">https://tonytyap.github.io/rps/terms.html</a></p>
+
+          <h2>13. Contact</h2>
+          <p><a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+        `
+      },
+
+      de: {
+        badge: "Datenschutzerklärung",
+        title: "Datenschutzerklärung",
+        subtitle: "Diese Seite erklärt, wie Schere Stein Papier KI Duell Informationen verarbeitet.",
+        html: `
+          <p><strong>Gültig ab:</strong> 2. Juni 2026</p>
+          <h2>1. Überblick</h2>
+          <p>Schere Stein Papier KI Duell ist ein Casual-Mobile-Game. Wir respektieren Ihre Privatsphäre und verarbeiten nur Informationen, die für Betrieb, Verbesserung und Support der App erforderlich sind.</p>
+
+          <h2>2. Informationen, die wir verarbeiten können</h2>
+          <ul>
+            <li>Spieldaten wie Punktestand, virtuelle Münzen, Erfolge, Missionen, Statistiken, Einstellungen und Fortschritt.</li>
+            <li>Technische Daten wie Gerätetyp, Betriebssystem, App-Version, Absturzberichte, Diagnosen und Leistung.</li>
+            <li>Kaufbezogene Informationen, die von Apple verarbeitet werden, z. B. Kaufstatus. Wir erhalten keine vollständigen Kartendaten.</li>
+            <li>Werbebezogene Daten, wenn Werbung oder belohnte Werbung aktiviert ist.</li>
+          </ul>
+
+          <h2>3. Nutzung der Informationen</h2>
+          <ul>
+            <li>Betrieb der App und Speichern des Fortschritts.</li>
+            <li>Bereitstellung virtueller Münzen, Belohnungen, Erfolge und Statistiken.</li>
+            <li>Überprüfung von In-App-Käufen über Apple.</li>
+            <li>Anzeige von Werbung oder belohnter Werbung.</li>
+            <li>Verbesserung der Leistung, Fehlerbehebung und Support.</li>
+            <li>Einhaltung rechtlicher, sicherheitsbezogener und plattformbezogener Anforderungen.</li>
+          </ul>
+
+          <h2>4. Virtuelle Münzen</h2>
+          <div class="notice">Virtuelle Münzen und Belohnungen sind Unterhaltungsgegenstände. Sie haben keinen realen Wert und können nicht ausgezahlt, getauscht, übertragen oder gegen Geld, Preise, Geschenkkarten, Kryptowährungen, NFTs, physische Waren oder reale Werte eingelöst werden.</div>
+
+          <h2>5. Drittanbieter</h2>
+          <p>Die App kann Drittanbieterdienste für Verteilung, Analyse, Absturzberichte, Käufe, Werbung oder belohnte Werbung verwenden. Diese Dienste können Daten gemäß ihren eigenen Datenschutzrichtlinien verarbeiten.</p>
+
+          <h2>6. Datenschutz von Kindern</h2>
+          <p>Die App richtet sich an ein allgemeines Publikum. Wir sammeln wissentlich keine personenbezogenen Daten von Kindern in einer Weise, die nach geltendem Recht eine elterliche Zustimmung erfordert.</p>
+
+          <h2>7. Aufbewahrung</h2>
+          <p>Wir speichern Informationen nur so lange, wie es für die in dieser Erklärung beschriebenen Zwecke erforderlich ist.</p>
+
+          <h2>8. Sicherheit</h2>
+          <p>Wir verwenden angemessene Schutzmaßnahmen, aber keine elektronische Speicher- oder Übertragungsmethode ist vollständig sicher.</p>
+
+          <h2>9. Ihre Wahlmöglichkeiten</h2>
+          <p>Sie können App-Berechtigungen in den Geräteeinstellungen verwalten und uns bei Datenschutzfragen kontaktieren.</p>
+
+          <h2>10. Internationale Nutzer</h2>
+          <p>Ihre Informationen können je nach verwendeten Diensten in anderen Ländern verarbeitet werden.</p>
+
+          <h2>11. Änderungen</h2>
+          <p>Wir können diese Datenschutzerklärung aktualisieren. Die aktualisierte Version wird auf dieser Seite veröffentlicht.</p>
+
+          <h2>12. Nutzungsbedingungen / EULA</h2>
+          <p><a href="https://tonytyap.github.io/rps/terms.html">https://tonytyap.github.io/rps/terms.html</a></p>
+
+          <h2>13. Kontakt</h2>
+          <p><a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+        `
+      },
+
+      it: {
+        badge: "Informativa sulla privacy",
+        title: "Informativa sulla privacy",
+        subtitle: "Questa pagina spiega come Sasso Carta Forbici Duello IA gestisce le informazioni.",
+        html: `
+          <p><strong>Data di entrata in vigore:</strong> 2 giugno 2026</p>
+          <h2>1. Panoramica</h2>
+          <p>Sasso Carta Forbici Duello IA è un gioco mobile casual. Rispettiamo la tua privacy e cerchiamo di trattare solo le informazioni necessarie per gestire, migliorare e supportare l’App.</p>
+
+          <h2>2. Informazioni che possiamo trattare</h2>
+          <ul>
+            <li>Dati di gioco, come punteggio, saldo di monete virtuali, obiettivi, missioni, statistiche, impostazioni e progresso.</li>
+            <li>Dati tecnici, come tipo di dispositivo, sistema operativo, versione dell’app, report di crash, diagnostica e prestazioni.</li>
+            <li>Informazioni sugli acquisti elaborate da Apple, come stato dell’acquisto. Non riceviamo i dati completi della carta.</li>
+            <li>Dati relativi agli annunci, se annunci o annunci con ricompensa sono abilitati.</li>
+          </ul>
+
+          <h2>3. Come usiamo le informazioni</h2>
+          <ul>
+            <li>Per far funzionare l’App e salvare i progressi.</li>
+            <li>Per fornire monete virtuali, ricompense, obiettivi e statistiche.</li>
+            <li>Per verificare acquisti tramite Apple.</li>
+            <li>Per mostrare annunci o annunci con ricompensa.</li>
+            <li>Per migliorare prestazioni, correggere bug e fornire supporto.</li>
+            <li>Per rispettare requisiti legali, di sicurezza e di piattaforma.</li>
+          </ul>
+
+          <h2>4. Monete virtuali</h2>
+          <div class="notice">Le monete virtuali e le ricompense sono oggetti di intrattenimento. Non hanno valore reale e non possono essere prelevate, scambiate, trasferite o riscattate per denaro, premi, buoni regalo, criptovalute, NFT, beni fisici o qualsiasi valore reale.</div>
+
+          <h2>5. Servizi di terze parti</h2>
+          <p>L’App può usare servizi di terze parti per distribuzione, analisi, report di crash, acquisti, annunci o annunci con ricompensa. Questi servizi possono trattare dati secondo le proprie informative sulla privacy.</p>
+
+          <h2>6. Privacy dei minori</h2>
+          <p>L’App è destinata a un pubblico generale. Non raccogliamo consapevolmente informazioni personali da minori in modo che richieda il consenso dei genitori secondo la legge applicabile.</p>
+
+          <h2>7. Conservazione</h2>
+          <p>Conserviamo le informazioni solo per il tempo necessario agli scopi descritti in questa informativa.</p>
+
+          <h2>8. Sicurezza</h2>
+          <p>Usiamo misure ragionevoli per proteggere le informazioni, ma nessun metodo elettronico è completamente sicuro.</p>
+
+          <h2>9. Le tue scelte</h2>
+          <p>Puoi gestire i permessi nelle impostazioni del dispositivo e contattarci per domande sulla privacy.</p>
+
+          <h2>10. Utenti internazionali</h2>
+          <p>Le tue informazioni possono essere trattate in paesi diversi dal tuo, a seconda dei servizi utilizzati.</p>
+
+          <h2>11. Modifiche</h2>
+          <p>Possiamo aggiornare questa Informativa sulla privacy. La versione aggiornata sarà pubblicata su questa pagina.</p>
+
+          <h2>12. Termini di utilizzo / EULA</h2>
+          <p><a href="https://tonytyap.github.io/rps/terms.html">https://tonytyap.github.io/rps/terms.html</a></p>
+
+          <h2>13. Contatto</h2>
+          <p><a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+        `
+      },
+
+      nl: {
+        badge: "Privacybeleid",
+        title: "Privacybeleid",
+        subtitle: "Deze pagina legt uit hoe Steen Papier Schaar AI Duel informatie verwerkt.",
+        html: `
+          <p><strong>Ingangsdatum:</strong> 2 juni 2026</p>
+          <h2>1. Overzicht</h2>
+          <p>Steen Papier Schaar AI Duel is een casual mobiele game. We respecteren je privacy en proberen alleen informatie te verwerken die nodig is om de App te gebruiken, verbeteren en ondersteunen.</p>
+
+          <h2>2. Informatie die we kunnen verwerken</h2>
+          <ul>
+            <li>Spelgegevens zoals score, virtuele muntbalans, prestaties, missies, statistieken, instellingen en voortgang.</li>
+            <li>Technische gegevens zoals apparaattype, besturingssysteem, appversie, crashrapporten, diagnostiek en prestaties.</li>
+            <li>Aankoopinformatie verwerkt door Apple, zoals aankoopstatus. We ontvangen geen volledige betaalkaartgegevens.</li>
+            <li>Advertentiegegevens als advertenties of beloonde advertenties zijn ingeschakeld.</li>
+          </ul>
+
+          <h2>3. Hoe we informatie gebruiken</h2>
+          <ul>
+            <li>Om de App te laten werken en voortgang op te slaan.</li>
+            <li>Om virtuele munten, beloningen, prestaties en statistieken te leveren.</li>
+            <li>Om in-app aankopen via Apple te controleren.</li>
+            <li>Om advertenties of beloonde advertenties te tonen.</li>
+            <li>Om prestaties te verbeteren, bugs op te lossen en ondersteuning te bieden.</li>
+            <li>Om te voldoen aan wettelijke, veiligheids- en platformvereisten.</li>
+          </ul>
+
+          <h2>4. Virtuele munten</h2>
+          <div class="notice">Virtuele munten en beloningen zijn entertainmentitems. Ze hebben geen echte waarde en kunnen niet worden opgenomen, geruild, overgedragen of ingewisseld voor geld, prijzen, cadeaubonnen, crypto, NFT’s, fysieke goederen of enige echte waarde.</div>
+
+          <h2>5. Diensten van derden</h2>
+          <p>De App kan diensten van derden gebruiken voor distributie, analyse, crashrapporten, aankopen, advertenties of beloonde advertenties. Deze diensten kunnen gegevens verwerken volgens hun eigen privacybeleid.</p>
+
+          <h2>6. Privacy van kinderen</h2>
+          <p>De App is bedoeld voor een algemeen publiek. We verzamelen niet bewust persoonlijke informatie van kinderen op een manier waarvoor ouderlijke toestemming vereist is volgens toepasselijke wetgeving.</p>
+
+          <h2>7. Bewaring</h2>
+          <p>We bewaren informatie alleen zolang als nodig is voor de doelen die in dit beleid worden beschreven.</p>
+
+          <h2>8. Beveiliging</h2>
+          <p>We gebruiken redelijke maatregelen om informatie te beschermen, maar geen enkele elektronische methode is volledig veilig.</p>
+
+          <h2>9. Jouw keuzes</h2>
+          <p>Je kunt appmachtigingen beheren in de apparaatinstellingen en contact met ons opnemen over privacyvragen.</p>
+
+          <h2>10. Internationale gebruikers</h2>
+          <p>Je informatie kan worden verwerkt in andere landen, afhankelijk van de gebruikte diensten.</p>
+
+          <h2>11. Wijzigingen</h2>
+          <p>We kunnen dit Privacybeleid bijwerken. De bijgewerkte versie wordt op deze pagina geplaatst.</p>
+
+          <h2>12. Gebruiksvoorwaarden / EULA</h2>
+          <p><a href="https://tonytyap.github.io/rps/terms.html">https://tonytyap.github.io/rps/terms.html</a></p>
+
+          <h2>13. Contact</h2>
+          <p><a href="mailto:developtonyt@icloud.com">developtonyt@icloud.com</a></p>
+        `
+      }
+    };
+
+    const select = document.getElementById("langSelect");
+    Object.entries(LANGS).forEach(([code, label]) => {
+      const option = document.createElement("option");
+      option.value = code;
+      option.textContent = label;
+      select.appendChild(option);
+    });
+
+    function getInitialLang() {
+      const saved = localStorage.getItem("rps_lang");
+      if (saved && DATA[saved]) return saved;
+      const browser = (navigator.language || "en").slice(0, 2);
+      return DATA[browser] ? browser : "en";
+    }
+
+    function render(lang) {
+      const data = DATA[lang] || DATA.en;
+      document.documentElement.lang = lang;
+      document.getElementById("badge").textContent = data.badge;
+      document.getElementById("title").textContent = data.title;
+      document.getElementById("subtitle").textContent = data.subtitle;
+      document.getElementById("content").innerHTML = data.html;
+      select.value = lang;
+      localStorage.setItem("rps_lang", lang);
+    }
+
+    select.addEventListener("change", (e) => render(e.target.value));
+    document.getElementById("year").textContent = new Date().getFullYear();
+    render(getInitialLang());
+  </script>
+</body>
+</html>
